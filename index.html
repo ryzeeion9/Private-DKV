@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DKV My Study Space</title>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --bg-dark: #0f0c1b;
+      --card-bg: #18142a;
+      --card-border: #282244;
+      --accent-purple: #7c3aed;
+      --accent-light: #a78bfa;
+      --accent-pink: #ec4899;
+      --text-main: #f3f4f6;
+      --text-sub: #9ca3af;
+      --input-bg: #110e21;
+      --sidebar-width: 240px;
+      --badge-success: #10b981;
+      --badge-pending: #f59e0b;
+    }
+
+    [data-theme="light"] {
+      --bg-dark: #f1f3f9;
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      --accent-purple: #6d28d9;
+      --accent-light: #8b5cf6;
+      --text-main: #1f2937;
+      --text-sub: #6b7280;
+      --input-bg: #f8fafc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      user-select: none;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: var(--sidebar-width);
+      background: var(--card-bg);
+      border-right: 1px solid var(--card-border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px 15px;
+      position: fixed;
+      height: 100vh;
+      z-index: 100;
+      transition: all 0.3s ease;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--text-main);
+      margin-bottom: 30px;
+      padding-left: 5px;
+    }
+
+    .brand-icon {
+      width: 35px;
+      height: 35px;
+      background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .nav-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex-grow: 1;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      color: var(--text-sub);
+      text-decoration: none;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-item:hover, .nav-item.active {
+      background: var(--accent-purple);
+      color: white;
+    }
+
+    .sidebar-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-top: 1px solid var(--card-border);
+      padding-top: 15px;
+    }
+
+    /* Theme Switch */
+    .theme-switch {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      color: var(--text-sub);
+    }
+
+    .toggle-checkbox {
+      appearance: none;
+      width: 40px;
+      height: 22px;
+      background: var(--card-border);
+      border-radius: 20px;
+      position: relative;
+      cursor: pointer;
+      outline: none;
+      transition: background 0.3s;
+    }
+
+    .toggle-checkbox:checked {
+      background: var(--accent-purple);
+    }
+
+    .toggle-checkbox::before {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      top: 3px;
+      left: 3px;
+      background: white;
+      transition: 0.3s;
+    }
+
+    .toggle-checkbox:checked::before {
+      left: 21px;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      padding: 25px;
+      max-width: calc(100vw - var(--sidebar-width));
+      min-height: 100vh;
+    }
+
+    .page {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Banner & Profile Header (Discord Style) */
+    .profile-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      border: 1px solid var(--card-border);
+      overflow: hidden;
+      margin-bottom: 25px;
+      position: relative;
+    }
+
+    .profile-banner {
+      height: 160px;
+      background: linear-gradient(to right, #4c1d95, #831843);
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .profile-body {
+      padding: 20px 25px 25px 25px;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .profile-avatar-wrapper {
+      position: absolute;
+      top: -60px;
+      left: 25px;
+    }
+
+    .profile-avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 5px solid var(--card-bg);
+      background: #312e81;
+      object-fit: cover;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .profile-info {
+      margin-left: 135px;
+    }
+
+    .profile-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .profile-status {
+      font-size: 0.9rem;
+      color: var(--text-sub);
+      margin-top: 2px;
+    }
+
+    .profile-bio {
+      margin-top: 8px;
+      font-size: 0.85rem;
+      color: var(--text-main);
+      font-style: italic;
+    }
+
+    .edit-profile-btn {
+      background: var(--card-border);
+      color: var(--text-main);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      transition: 0.2s;
+    }
+
+    .edit-profile-btn:hover {
+      background: var(--accent-purple);
+      color: white;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .stat-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .stat-val {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+    }
+
+    /* Grid Layouts for Sections */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .section-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .see-all-btn {
+      color: var(--accent-light);
+      text-decoration: none;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    /* List Items */
+    .item-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .task-item {
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 12px 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .task-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .task-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .task-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .task-meta {
+      font-size: 0.75rem;
+      color: var(--text-sub);
+      margin-top: 2px;
+    }
+
+    .badge {
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .badge-pending {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--badge-pending);
+    }
+
+    .badge-done {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--badge-success);
+    }
+
+    .semester-tag {
+      background: rgba(124, 58, 237, 0.2);
+      color: var(--accent-light);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      margin-left: 6px;
+    }
+
+    /* Schedule UI */
+    .schedule-day-group {
+      margin-bottom: 20px;
+    }
+
+    .schedule-day-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent-light);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 10px;
+    }
+
+    .schedule-card {
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Cards Grid (Jurnal & Ide) */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .content-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .content-card-img {
+      height: 140px;
+      width: 100%;
+      object-fit: cover;
+      background: var(--input-bg);
+    }
+
+    .content-card-body {
+      padding: 15px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .content-card-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+
+    .content-card-desc {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .tags-container {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      color: var(--text-sub);
+    }
+
+    /* Modals */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 25px;
+    }
+
+    .modal-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      margin-bottom: 6px;
+    }
+
+    .form-control {
+      width: 100%;
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      padding: 10px 14px;
+      border-radius: 10px;
+      color: var(--text-main);
+      outline: none;
+    }
+
+    .btn {
+      padding: 10px 18px;
+      border-radius: 10px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--accent-purple);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: var(--card-border);
+      color: var(--text-main);
+    }
+
+    /* Cropper Canvas Container */
+    .cropper-container {
+      width: 100%;
+      height: 220px;
+      background: #000;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+
+    #cropCanvas {
+      width: 100%;
+      height: 100%;
+      cursor: move;
+    }
+
+    .crop-controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+      justify-content: center;
+    }
+
+    /* Tabs Bar */
+    .tabs-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .tab-btn {
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-sub);
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    .tab-btn.active {
+      background: var(--accent-purple);
+      color: white;
+      border-color: var(--accent-purple);
+    }
+
+    /* Attached File Preview */
+    .file-attachment-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(124, 58, 237, 0.1);
+      border: 1px dashed var(--accent-purple);
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      color: var(--accent-light);
+      margin-top: 6px;
+      text-decoration: none;
+    }
+
+    /* Responsive Mobile UI */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: fixed;
+        bottom: 0;
+        top: auto;
+        border-right: none;
+        border-top: 1px solid var(--card-border);
+        padding: 8px;
+        flex-direction: row;
+      }
+      .brand, .sidebar-footer { display: none; }
+      .nav-menu { flex-direction: row; justify-content: space-around; width: 100%; }
+      .nav-item { flex-direction: column; gap: 4px; font-size: 0.65rem; padding: 6px; }
+      .main-content { margin-left: 0; max-width: 100vw; padding: 15px; padding-bottom: 80px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .dashboard-grid { grid-template-columns: 1fr; }
+      .profile-info { margin-left: 0; margin-top: 60px; }
+      .profile-body { flex-direction: column; align-items: flex-start; }
+      .edit-profile-btn { margin-top: 10px; width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body data-theme="dark">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div>
+      <div class="brand">
+        <div class="brand-icon"><i data-lucide="shapes"></i></div>
+        <span>DKV Space</span>
+      </div>
+      <nav class="nav-menu">
+        <div class="nav-item active" onclick="switchPage('beranda')">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Beranda</span>
+        </div>
+        <div class="nav-item" onclick="switchPage('jadwal')">
+          <i data-lucide="calendar"></i>
+          <span>Jadwal</span>
+        </div>
+        <div class="nav-item" onclick="switchPage('tugas')">
+          <i data-lucide="check-square"></i>
+          <span>Tugas</span>
+        </div>
+        <div class="nav-item" onclick="switchPage('jurnal')">
+          <i data-lucide="book-open"></i>
+          <span>Jurnal</span>
+        </div>
+        <div class="nav-item" onclick="switchPage('ide')">
+          <i data-lucide="lightbulb"></i>
+          <span>Ide</span>
+        </div>
+      </nav>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="nav-item" onclick="switchPage('pengaturan')">
+        <i data-lucide="settings"></i>
+        <span>Pengaturan</span>
+      </div>
+      <div class="theme-switch">
+        <span style="font-size:0.8rem;"><i data-lucide="moon" style="width:14px;"></i> Mode Gelap</span>
+        <input type="checkbox" id="themeToggle" class="toggle-checkbox" onchange="toggleTheme()">
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- PAGE: BERANDA -->
+    <div id="page-beranda" class="page active">
+      <div class="profile-card">
+        <div class="profile-banner" id="displayBanner"></div>
+        <div class="profile-body">
+          <div class="profile-avatar-wrapper">
+            <div class="profile-avatar" id="displayAvatar"></div>
+          </div>
+          <div class="profile-info">
+            <div class="profile-name">
+              <span id="displayName">Zaldy</span>
+              <span class="semester-tag" id="displaySemesterTag">Semester 3</span>
+            </div>
+            <div class="profile-status" id="displayStatus">Mahasiswa DKV</div>
+            <div class="profile-bio" id="displayBio">"Sedikit demi sedikit, pasti jadi."</div>
+          </div>
+          <button class="edit-profile-btn" onclick="switchPage('pengaturan')">
+            <i data-lucide="edit-3" style="width:14px;"></i> Edit Profil
+          </button>
+        </div>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#8b5cf6;"><i data-lucide="check-square"></i></div>
+          <div>
+            <div class="stat-val" id="statTugasCount">0</div>
+            <div class="stat-label">Total Tugas</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#ec4899;"><i data-lucide="book-open"></i></div>
+          <div>
+            <div class="stat-val" id="statJurnalCount">0</div>
+            <div class="stat-label">Jurnal</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#f59e0b;"><i data-lucide="lightbulb"></i></div>
+          <div>
+            <div class="stat-val" id="statIdeCount">0</div>
+            <div class="stat-label">Ide</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#10b981;"><i data-lucide="bookmark"></i></div>
+          <div>
+            <div class="stat-val" id="statRefCount">0</div>
+            <div class="stat-label">Referensi</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="section-card">
+          <div class="section-header">
+            <span class="section-title">Tugas Terbaru</span>
+            <span class="see-all-btn" onclick="switchPage('tugas')">Lihat Semua</span>
+          </div>
+          <div class="item-list" id="dashTaskList"></div>
+        </div>
+
+        <div class="section-card">
+          <div class="section-header">
+            <span class="section-title">Jadwal Hari Ini</span>
+            <span class="see-all-btn" onclick="switchPage('jadwal')">Lihat Jadwal</span>
+          </div>
+          <div class="item-list" id="dashScheduleList"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE: JADWAL -->
+    <div id="page-jadwal" class="page">
+      <div class="section-header" style="margin-bottom:20px;">
+        <h2>Jadwal Kuliah</h2>
+      </div>
+      <div id="scheduleContainer"></div>
+    </div>
+
+    <!-- PAGE: TUGAS -->
+    <div id="page-tugas" class="page">
+      <div class="section-header" style="margin-bottom:20px;">
+        <h2>Daftar Tugas</h2>
+        <button class="btn btn-primary" onclick="openTaskModal()"><i data-lucide="plus"></i> Tambah Tugas</button>
+      </div>
+
+      <div class="tabs-bar">
+        <button class="tab-btn active" onclick="filterTasks('all', this)">Semua</button>
+        <button class="tab-btn" onclick="filterTasks('pending', this)">Belum Selesai</button>
+        <button class="tab-btn" onclick="filterTasks('done', this)">Selesai</button>
+      </div>
+
+      <div class="item-list" id="fullTaskList"></div>
+    </div>
+
+    <!-- PAGE: JURNAL -->
+    <div id="page-jurnal" class="page">
+      <div class="section-header" style="margin-bottom:20px;">
+        <h2>Jurnal Pembelajaran</h2>
+        <button class="btn btn-primary" onclick="openMediaModal('Jurnal')"><i data-lucide="plus"></i> Tambah Jurnal</button>
+      </div>
+      <div class="cards-grid" id="jurnalGrid"></div>
+    </div>
+
+    <!-- PAGE: IDE -->
+    <div id="page-ide" class="page">
+      <div class="section-header" style="margin-bottom:20px;">
+        <h2>Ide & Referensi Visual</h2>
+        <button class="btn btn-primary" onclick="openMediaModal('Ide')"><i data-lucide="plus"></i> Tambah Ide</button>
+      </div>
+      <div class="cards-grid" id="ideGrid"></div>
+    </div>
+
+    <!-- PAGE: PENGATURAN -->
+    <div id="page-pengaturan" class="page">
+      <h2 style="margin-bottom:20px;">Pengaturan Profil & Jadwal</h2>
+      
+      <div class="tabs-bar">
+        <button class="tab-btn active" onclick="switchSettingTab('profile', this)">Edit Profil</button>
+        <button class="tab-btn" onclick="switchSettingTab('schedule', this)">Edit Jadwal Matkul</button>
+      </div>
+
+      <div id="settingTabProfile">
+        <div class="section-card" style="max-width:600px;">
+          <div class="form-group">
+            <label>Nama Lengkap</label>
+            <input type="text" id="inputName" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Semester Sekarang</label>
+            <input type="number" id="inputSemester" class="form-control" placeholder="Contoh: 3">
+          </div>
+          <div class="form-group">
+            <label>Status / Program Studi</label>
+            <input type="text" id="inputStatus" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Bio Singkat</label>
+            <textarea id="inputBio" class="form-control" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Ganti Foto Profil (Avatar)</label>
+            <input type="file" id="fileAvatar" accept="image/*" class="form-control" onchange="initCropper(this, 'avatar')">
+          </div>
+          <div class="form-group">
+            <label>Ganti Banner Profil</label>
+            <input type="file" id="fileBanner" accept="image/*" class="form-control" onchange="initCropper(this, 'banner')">
+          </div>
+          <button class="btn btn-primary" onclick="saveProfileSettings()">Simpan Perubahan Profil</button>
+        </div>
+      </div>
+
+      <div id="settingTabSchedule" style="display:none;">
+        <div class="section-card" style="max-width:700px;">
+          <h3 style="margin-bottom:15px; font-size:1rem;">Kelola Mata Kuliah</h3>
+          <div class="form-group">
+            <label>Hari</label>
+            <select id="schedDay" class="form-control">
+              <option value="Senin">Senin</option>
+              <option value="Selasa">Selasa</option>
+              <option value="Rabu">Rabu</option>
+              <option value="Kamis">Kamis</option>
+              <option value="Jumat">Jumat</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Nama Mata Kuliah</label>
+            <input type="text" id="schedName" class="form-control" placeholder="Misal: Tipografi 2">
+          </div>
+          <div class="form-group">
+            <label>Jam Kuliah</label>
+            <input type="text" id="schedTime" class="form-control" placeholder="09:00 - 11:30">
+          </div>
+          <button class="btn btn-primary" onclick="addScheduleItem()">Tambah / Update Matkul</button>
+
+          <hr style="border-color:var(--card-border); margin:20px 0;">
+          <div id="scheduleEditorList"></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- MODAL: CROPPER GAMBAR -->
+  <div class="modal-overlay" id="cropModal">
+    <div class="modal-card">
+      <div class="modal-title">Potong / Adjust Gambar</div>
+      <div class="cropper-container">
+        <canvas id="cropCanvas"></canvas>
+      </div>
+      <div class="crop-controls">
+        <button class="btn btn-secondary" onclick="adjustZoom(1.1)"><i data-lucide="zoom-in"></i> Zoom In</button>
+        <button class="btn btn-secondary" onclick="adjustZoom(0.9)"><i data-lucide="zoom-out"></i> Zoom Out</button>
+      </div>
+      <div style="display:flex; justify-content:flex-end; gap:10px;">
+        <button class="btn btn-secondary" onclick="closeCropper()">Batal</button>
+        <button class="btn btn-primary" onclick="applyCrop()">Terapkan & Simpan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: TAMBAH/EDIT TUGAS -->
+  <div class="modal-overlay" id="taskModal">
+    <div class="modal-card">
+      <div class="modal-title" id="taskModalTitle">Tambah Tugas Baru</div>
+      <input type="hidden" id="taskId">
+      <div class="form-group">
+        <label>Mata Kuliah / Judul Tugas</label>
+        <input type="text" id="taskInputTitle" class="form-control" placeholder="Contoh: Storyboard Proyek Akhir">
+      </div>
+      <div class="form-group">
+        <label>Kategori / Tag</label>
+        <input type="text" id="taskInputTag" class="form-control" placeholder="Contoh: Animasi 2D, Desain, Video">
+      </div>
+      <div class="form-group">
+        <label>Batas Waktu (Deadline)</label>
+        <input type="text" id="taskInputDeadline" class="form-control" placeholder="Contoh: Batas: 24 Okt 2026">
+      </div>
+      <div class="form-group">
+        <label>Lampiran File / Gambar (Opsional)</label>
+        <input type="file" id="taskInputFile" class="form-control" onchange="handleTaskFileUpload(this)">
+        <div id="taskFileStatus"></div>
+      </div>
+      <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+        <button class="btn btn-secondary" onclick="closeTaskModal()">Batal</button>
+        <button class="btn btn-primary" onclick="saveTask()">Simpan Tugas</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: TAMBAH MEDIA (JURNAL / IDE) -->
+  <div class="modal-overlay" id="mediaModal">
+    <div class="modal-card">
+      <div class="modal-title" id="mediaModalTitle">Tambah Jurnal Pembelajaran</div>
+      <input type="hidden" id="mediaType">
+      <div class="form-group">
+        <label>Judul</label>
+        <input type="text" id="mediaInputTitle" class="form-control" placeholder="Judul entri...">
+      </div>
+      <div class="form-group">
+        <label>Deskripsi / Catatan Refleksi</label>
+        <textarea id="mediaInputDesc" class="form-control" rows="3" placeholder="Tuliskan catatan pembelajaran atau ide..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Unggah Gambar / Referensi Visual</label>
+        <input type="file" id="mediaInputImage" accept="image/*" class="form-control" onchange="handleMediaImageUpload(this)">
+      </div>
+      <div class="form-group">
+        <label>Tag (pisahkan koma)</label>
+        <input type="text" id="mediaInputTags" class="form-control" placeholder="Fotografi, Sketsa, Referensi">
+      </div>
+      <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+        <button class="btn btn-secondary" onclick="closeMediaModal()">Batal</button>
+        <button class="btn btn-primary" onclick="saveMedia()">Simpan</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // DATA DEFAULT STORAGE
+    const DEFAULT_PROFILE = {
+      name: "Zaldy",
+      status: "Mahasiswa DKV",
+      bio: "Sedikit demi sedikit, pasti jadi.",
+      semester: 3,
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80",
+      banner: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80"
+    };
+
+    const DEFAULT_SCHEDULE = {
+      "Senin": [
+        { name: "Creative thinking", time: "09:30 - 12:00" },
+        { name: "Sound design", time: "13:00 - 15:30" }
+      ],
+      "Selasa": [
+        { name: "Sinematografi", time: "09:00 - 12:00" },
+        { name: "Animasi 2D", time: "13:00 - 16:20" }
+      ],
+      "Rabu": [
+        { name: "Fotografi komersial", time: "08:40 - 11:10" },
+        { name: "Tipografi", time: "13:00 - 15:30" }
+      ],
+      "Kamis": [
+        { name: "Storyboard", time: "13:00 - 15:30" }
+      ],
+      "Jumat": []
+    };
+
+    const DEFAULT_TASKS = [
+      { id: '1', title: 'Tugas Animasi 2D', tag: 'Animasi', deadline: 'Batas: 18 Okt 2026', done: false, semester: 3, file: null },
+      { id: '2', title: 'Tugas Sinematografi', tag: 'Video', deadline: 'Batas: 16 Okt 2026', done: false, semester: 3, file: null },
+      { id: '3', title: 'Tugas Tipografi', tag: 'Desain', deadline: 'Batas: 14 Okt 2026', done: true, semester: 3, file: null },
+      { id: '4', title: 'Tugas Fotografi Komersial', tag: 'Foto', deadline: 'Batas: 12 Okt 2026', done: true, semester: 3, file: null }
+    ];
+
+    const DEFAULT_JURNAL = [
+      { id: '1', title: 'Proses Sketsa Storyboard', desc: 'Mencoba membuat beberapa alternatif angle untuk scene utama.', img: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=500&q=80', tags: ['Storyboard', 'Sketsa'], semester: 3, date: '12 Okt 2026' },
+      { id: '2', title: 'Eksperimen Fotografi', desc: 'Mencoba teknik low light photography.', img: 'https://images.unsplash.com/photo-1554048612-b6a482bc67e5?auto=format&fit=crop&w=500&q=80', tags: ['Fotografi', 'Referensi'], semester: 3, date: '10 Okt 2026' }
+    ];
+
+    const DEFAULT_IDE = [
+      { id: '1', title: 'Konsep Visual Cyberpunk', desc: 'Referensi warna neon untuk proyek animasi.', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=500&q=80', tags: ['Cyberpunk', 'Moodboard'], semester: 3 },
+      { id: '2', title: 'Referensi Warna & Style', desc: 'Kombinasi warna pastel untuk UI/UX.', img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=500&q=80', tags: ['ColorPalette'], semester: 3 }
+    ];
+
+    // INITIAL STATE & LOCAL STORAGE
+    let profile = JSON.parse(localStorage.getItem('dkv_profile')) || DEFAULT_PROFILE;
+    let schedule = JSON.parse(localStorage.getItem('dkv_schedule')) || DEFAULT_SCHEDULE;
+    let tasks = JSON.parse(localStorage.getItem('dkv_tasks')) || DEFAULT_TASKS;
+    let jurnal = JSON.parse(localStorage.getItem('dkv_jurnal')) || DEFAULT_JURNAL;
+    let ide = JSON.parse(localStorage.getItem('dkv_ide')) || DEFAULT_IDE;
+
+    let tempTaskFile = null;
+    let tempMediaImage = null;
+
+    // INIT APP
+    window.onload = function() {
+      lucide.createIcons();
+      renderProfileUI();
+      renderDashboard();
+      renderScheduleUI();
+      renderTasksUI('all');
+      renderJurnalUI();
+      renderIdeUI();
+      initSettingsForm();
+    };
+
+    function saveData() {
+      localStorage.setItem('dkv_profile', JSON.stringify(profile));
+      localStorage.setItem('dkv_schedule', JSON.stringify(schedule));
+      localStorage.setItem('dkv_tasks', JSON.stringify(tasks));
+      localStorage.setItem('dkv_jurnal', JSON.stringify(jurnal));
+      localStorage.setItem('dkv_ide', JSON.stringify(ide));
+    }
+
+    // NAVIGATION
+    function switchPage(pageId) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      
+      document.getElementById(`page-${pageId}`).classList.add('active');
+      
+      const navTarget = Array.from(document.querySelectorAll('.nav-item'))
+        .find(el => el.getAttribute('onclick')?.includes(pageId));
+      if(navTarget) navTarget.classList.add('active');
+
+      if(pageId === 'beranda') renderDashboard();
+      if(pageId === 'jadwal') renderScheduleUI();
+      if(pageId === 'pengaturan') renderScheduleEditorList();
+    }
+
+    function toggleTheme() {
+      const isDark = document.getElementById('themeToggle').checked;
+      document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    }
+
+    // PROFILE & DASHBOARD RENDER
+    function renderProfileUI() {
+      document.getElementById('displayName').innerText = profile.name;
+      document.getElementById('displayStatus').innerText = profile.status;
+      document.getElementById('displayBio').innerText = `"${profile.bio}"`;
+      document.getElementById('displaySemesterTag').innerText = `Semester ${profile.semester}`;
+      
+      document.getElementById('displayAvatar').style.backgroundImage = `url('${profile.avatar}')`;
+      document.getElementById('displayBanner').style.backgroundImage = `url('${profile.banner}')`;
+    }
+
+    function renderDashboard() {
+      // Stats
+      document.getElementById('statTugasCount').innerText = tasks.length;
+      document.getElementById('statJurnalCount').innerText = jurnal.length;
+      document.getElementById('statIdeCount').innerText = ide.length;
+      document.getElementById('statRefCount').innerText = jurnal.length + ide.length;
+
+      // Recent Tasks (Max 3)
+      const dashTaskList = document.getElementById('dashTaskList');
+      dashTaskList.innerHTML = tasks.slice(0, 3).map(t => `
+        <div class="task-item">
+          <div class="task-left">
+            <div class="task-icon" style="background:${t.done ? '#10b981' : '#ec4899'};">
+              <i data-lucide="${t.done ? 'check' : 'clock'}" style="width:18px;"></i>
+            </div>
+            <div>
+              <div class="task-title">${t.title} <span class="semester-tag">Sem ${t.semester}</span></div>
+              <div class="task-meta">${t.deadline} • Tag: ${t.tag}</div>
+            </div>
+          </div>
+          <span class="badge ${t.done ? 'badge-done' : 'badge-pending'}">${t.done ? 'Selesai' : 'Belum'}</span>
+        </div>
+      `).join('');
+
+      // Today's Schedule
+      const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+      const todayName = days[new Date().getDay()];
+      const todaySched = schedule[todayName] || [];
+
+      const dashSchedList = document.getElementById('dashScheduleList');
+      if (todaySched.length === 0) {
+        dashSchedList.innerHTML = `<div style="color:var(--text-sub); font-size:0.85rem;">Tidak ada jadwal kuliah hari ini (${todayName}). Libur! 🎉</div>`;
+      } else {
+        dashSchedList.innerHTML = todaySched.map(s => `
+          <div class="schedule-card">
+            <i data-lucide="book-open" style="color:var(--accent-light);"></i>
+            <div>
+              <div style="font-weight:600; font-size:0.85rem;">${s.name}</div>
+              <div style="font-size:0.75rem; color:var(--text-sub);">${s.time}</div>
+            </div>
+          </div>
+        `).join('');
+      }
+      lucide.createIcons();
+    }
+
+    // SCHEDULE RENDER
+    function renderScheduleUI() {
+      const container = document.getElementById('scheduleContainer');
+      container.innerHTML = Object.keys(schedule).map(day => `
+        <div class="schedule-day-group">
+          <div class="schedule-day-title"><i data-lucide="calendar"></i> ${day}</div>
+          <div class="schedule-grid">
+            ${schedule[day].length === 0 ? '<div style="color:var(--text-sub); font-size:0.8rem;">Kosong / Tidak ada matkul</div>' : 
+              schedule[day].map(item => `
+                <div class="schedule-card">
+                  <div style="background:rgba(124,58,237,0.2); width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--accent-light);">
+                    <i data-lucide="book" style="width:16px;"></i>
+                  </div>
+                  <div>
+                    <div style="font-weight:600; font-size:0.85rem;">${item.name}</div>
+                    <div style="font-size:0.75rem; color:var(--text-sub);">${item.time}</div>
+                  </div>
+                </div>
+              `).join('')
+            }
+          </div>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    // TASKS RENDER & MODAL
+    function renderTasksUI(filter = 'all') {
+      const fullList = document.getElementById('fullTaskList');
+      let filtered = tasks;
+      if (filter === 'pending') filtered = tasks.filter(t => !t.done);
+      if (filter === 'done') filtered = tasks.filter(t => t.done);
+
+      fullList.innerHTML = filtered.map(t => `
+        <div class="task-item">
+          <div class="task-left">
+            <div class="task-icon" style="background:${t.done ? '#10b981' : '#7c3aed'}; cursor:pointer;" onclick="toggleTaskDone('${t.id}')">
+              <i data-lucide="${t.done ? 'check-square' : 'square'}" style="width:18px;"></i>
+            </div>
+            <div>
+              <div class="task-title">${t.title} <span class="semester-tag">Semester ${t.semester}</span></div>
+              <div class="task-meta">${t.deadline} • Kategori: ${t.tag}</div>
+              ${t.file ? `<a href="${t.file.data}" download="${t.file.name}" class="file-attachment-badge"><i data-lucide="paperclip" style="width:12px;"></i> ${t.file.name}</a>` : ''}
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <span class="badge ${t.done ? 'badge-done' : 'badge-pending'}">${t.done ? 'Selesai' : 'Belum'}</span>
+            <i data-lucide="trash-2" style="width:16px; color:#ef4444; cursor:pointer;" onclick="deleteTask('${t.id}')"></i>
+          </div>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    function filterTasks(type, btn) {
+      document.querySelectorAll('#page-tugas .tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderTasksUI(type);
+    }
+
+    function toggleTaskDone(id) {
+      tasks = tasks.map(t => t.id === id ? { ...t, done: !t.done } : t);
+      saveData();
+      renderTasksUI();
+    }
+
+    function deleteTask(id) {
+      tasks = tasks.filter(t => t.id !== id);
+      saveData();
+      renderTasksUI();
+    }
+
+    function openTaskModal() {
+      document.getElementById('taskId').value = '';
+      document.getElementById('taskInputTitle').value = '';
+      document.getElementById('taskInputTag').value = '';
+      document.getElementById('taskInputDeadline').value = '';
+      document.getElementById('taskFileStatus').innerHTML = '';
+      tempTaskFile = null;
+      document.getElementById('taskModal').classList.add('active');
+    }
+
+    function closeTaskModal() {
+      document.getElementById('taskModal').classList.remove('active');
+    }
+
+    function handleTaskFileUpload(input) {
+      const file = input.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          tempTaskFile = { name: file.name, data: e.target.result };
+          document.getElementById('taskFileStatus').innerHTML = `<span style="font-size:0.75rem; color:var(--badge-success);">✓ File terpilih: ${file.name}</span>`;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function saveTask() {
+      const title = document.getElementById('taskInputTitle').value.trim();
+      const tag = document.getElementById('taskInputTag').value.trim() || 'DKV';
+      const deadline = document.getElementById('taskInputDeadline').value.trim() || 'Batas: Segera';
+
+      if (!title) return alert('Judul tugas harus diisi!');
+
+      const newTask = {
+        id: Date.now().toString(),
+        title: title,
+        tag: tag,
+        deadline: deadline,
+        done: false,
+        semester: profile.semester, // Otomatis mengunci semester saat ini
+        file: tempTaskFile
+      };
+
+      tasks.unshift(newTask);
+      saveData();
+      renderTasksUI();
+      closeTaskModal();
+    }
+
+    // JURNAL & IDE RENDER
+    function renderJurnalUI() {
+      const grid = document.getElementById('jurnalGrid');
+      grid.innerHTML = jurnal.map(j => `
+        <div class="content-card">
+          <img src="${j.img}" class="content-card-img" alt="Jurnal">
+          <div class="content-card-body">
+            <div>
+              <div class="content-card-title">${j.title}</div>
+              <div class="content-card-desc">${j.desc}</div>
+            </div>
+            <div>
+              <div class="tags-container" style="margin-bottom:8px;">
+                <span class="tag">Semester ${j.semester}</span>
+                ${j.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+              </div>
+              <div style="font-size:0.7rem; color:var(--text-sub); display:flex; justify-content:space-between;">
+                <span>${j.date || 'Tersimpan'}</span>
+                <i data-lucide="trash-2" style="width:14px; color:#ef4444; cursor:pointer;" onclick="deleteJurnal('${j.id}')"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    function renderIdeUI() {
+      const grid = document.getElementById('ideGrid');
+      grid.innerHTML = ide.map(i => `
+        <div class="content-card">
+          <img src="${i.img}" class="content-card-img" alt="Ide">
+          <div class="content-card-body">
+            <div>
+              <div class="content-card-title">${i.title}</div>
+              <div class="content-card-desc">${i.desc}</div>
+            </div>
+            <div>
+              <div class="tags-container" style="margin-bottom:8px;">
+                <span class="tag">Semester ${i.semester}</span>
+                ${i.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+              </div>
+              <div style="font-size:0.7rem; color:var(--text-sub); text-align:right;">
+                <i data-lucide="trash-2" style="width:14px; color:#ef4444; cursor:pointer;" onclick="deleteIde('${i.id}')"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    function openMediaModal(type) {
+      document.getElementById('mediaType').value = type;
+      document.getElementById('mediaModalTitle').innerText = `Tambah ${type} Baru`;
+      document.getElementById('mediaInputTitle').value = '';
+      document.getElementById('mediaInputDesc').value = '';
+      document.getElementById('mediaInputTags').value = '';
+      tempMediaImage = null;
+      document.getElementById('mediaModal').classList.add('active');
+    }
+
+    function closeMediaModal() {
+      document.getElementById('mediaModal').classList.remove('active');
+    }
+
+    function handleMediaImageUpload(input) {
+      const file = input.files[0];
+      if(file) {
+        const reader = new FileReader();
+        reader.onload = function(e) { tempMediaImage = e.target.result; };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function saveMedia() {
+      const type = document.getElementById('mediaType').value;
+      const title = document.getElementById('mediaInputTitle').value.trim();
+      const desc = document.getElementById('mediaInputDesc').value.trim();
+      const tags = document.getElementById('mediaInputTags').value.split(',').map(t => t.trim()).filter(Boolean);
+
+      if(!title) return alert('Judul harus diisi!');
+
+      const defaultImg = 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=500&q=80';
+      const newItem = {
+        id: Date.now().toString(),
+        title: title,
+        desc: desc,
+        img: tempMediaImage || defaultImg,
+        tags: tags.length ? tags : ['DKV'],
+        semester: profile.semester,
+        date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })
+      };
+
+      if(type === 'Jurnal') {
+        jurnal.unshift(newItem);
+        renderJurnalUI();
+      } else {
+        ide.unshift(newItem);
+        renderIdeUI();
+      }
+
+      saveData();
+      closeMediaModal();
+    }
+
+    function deleteJurnal(id) { jurnal = jurnal.filter(j => j.id !== id); saveData(); renderJurnalUI(); }
+    function deleteIde(id) { ide = ide.filter(i => i.id !== id); saveData(); renderIdeUI(); }
+
+    // SETTINGS & SCHEDULE EDITOR
+    function initSettingsForm() {
+      document.getElementById('inputName').value = profile.name;
+      document.getElementById('inputStatus').value = profile.status;
+      document.getElementById('inputBio').value = profile.bio;
+      document.getElementById('inputSemester').value = profile.semester;
+    }
+
+    function switchSettingTab(tab, btn) {
+      document.querySelectorAll('#page-pengaturan .tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      document.getElementById('settingTabProfile').style.display = tab === 'profile' ? 'block' : 'none';
+      document.getElementById('settingTabSchedule').style.display = tab === 'schedule' ? 'block' : 'none';
+    }
+
+    function saveProfileSettings() {
+      profile.name = document.getElementById('inputName').value.trim() || profile.name;
+      profile.status = document.getElementById('inputStatus').value.trim() || profile.status;
+      profile.bio = document.getElementById('inputBio').value.trim() || profile.bio;
+      profile.semester = parseInt(document.getElementById('inputSemester').value) || profile.semester;
+
+      saveData();
+      renderProfileUI();
+      alert('Profil berhasil diperbarui!');
+    }
+
+    function addScheduleItem() {
+      const day = document.getElementById('schedDay').value;
+      const name = document.getElementById('schedName').value.trim();
+      const time = document.getElementById('schedTime').value.trim();
+
+      if(!name || !time) return alert('Nama matkul & jam harus diisi!');
+
+      if(!schedule[day]) schedule[day] = [];
+      schedule[day].push({ name, time });
+
+      saveData();
+      renderScheduleEditorList();
+      renderScheduleUI();
+
+      document.getElementById('schedName').value = '';
+      document.getElementById('schedTime').value = '';
+    }
+
+    function removeScheduleItem(day, index) {
+      schedule[day].splice(index, 1);
+      saveData();
+      renderScheduleEditorList();
+      renderScheduleUI();
+    }
+
+    function renderScheduleEditorList() {
+      const list = document.getElementById('scheduleEditorList');
+      list.innerHTML = Object.keys(schedule).map(day => `
+        <div style="margin-bottom:15px;">
+          <div style="font-weight:700; font-size:0.85rem; color:var(--accent-light);">${day}</div>
+          ${schedule[day].map((item, idx) => `
+            <div style="display:flex; justify-content:space-between; align-items:center; background:var(--input-bg); padding:8px 12px; border-radius:8px; margin-top:6px; font-size:0.8rem;">
+              <span>${item.name} (${item.time})</span>
+              <i data-lucide="trash-2" style="width:14px; color:#ef4444; cursor:pointer;" onclick="removeScheduleItem('${day}', ${idx})"></i>
+            </div>
+          `).join('')}
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    // IMAGE CROPPER LOGIC (HTML5 CANVAS)
+    let cropTarget = null; // 'avatar' | 'banner'
+    let cropImageObj = null;
+    let cropScale = 1;
+    let cropPanX = 0;
+    let cropPanY = 0;
+    let isDragging = false;
+    let dragStartX = 0;
+    let dragStartY = 0;
+
+    function initCropper(input, target) {
+      const file = input.files[0];
+      if (!file) return;
+
+      cropTarget = target;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        cropImageObj = new Image();
+        cropImageObj.onload = function() {
+          cropScale = 1;
+          cropPanX = 0;
+          cropPanY = 0;
+          document.getElementById('cropModal').classList.add('active');
+          drawCropCanvas();
+        };
+        cropImageObj.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function drawCropCanvas() {
+      const canvas = document.getElementById('cropCanvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (!cropImageObj) return;
+
+      ctx.save();
+      ctx.translate(canvas.width / 2 + cropPanX, canvas.height / 2 + cropPanY);
+      ctx.scale(cropScale, cropScale);
+      ctx.drawImage(cropImageObj, -cropImageObj.width / 2, -cropImageObj.height / 2);
+      ctx.restore();
+
+      // Mask Overlay (Simulasi Crop Frame)
+      ctx.fillStyle = 'rgba(0,0,0,0.5)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.beginPath();
+      if(cropTarget === 'avatar') {
+        ctx.arc(canvas.width/2, canvas.height/2, 70, 0, Math.PI * 2);
+      } else {
+        ctx.rect(canvas.width/2 - 140, canvas.height/2 - 50, 280, 100);
+      }
+      ctx.fill();
+      ctx.globalCompositeOperation = 'source-over';
+    }
+
+    function adjustZoom(factor) {
+      cropScale *= factor;
+      drawCropCanvas();
+    }
+
+    // Canvas Drag Pan Events
+    const canvas = document.getElementById('cropCanvas');
+    canvas.addEventListener('mousedown', e => {
+      isDragging = true;
+      dragStartX = e.clientX - cropPanX;
+      dragStartY = e.clientY - cropPanY;
+    });
+
+    window.addEventListener('mousemove', e => {
+      if(!isDragging) return;
+      cropPanX = e.clientX - dragStartX;
+      cropPanY = e.clientY - dragStartY;
+      drawCropCanvas();
+    });
+
+    window.addEventListener('mouseup', () => isDragging = false);
+
+    function closeCropper() {
+      document.getElementById('cropModal').classList.remove('active');
+    }
+
+    function applyCrop() {
+      const canvas = document.getElementById('cropCanvas');
+      const croppedDataUrl = canvas.toDataURL('image/png');
+
+      if (cropTarget === 'avatar') {
+        profile.avatar = croppedDataUrl;
+      } else {
+        profile.banner = croppedDataUrl;
+      }
+
+      saveData();
+      renderProfileUI();
+      closeCropper();
+    }
+  </script>
+</body>
+</html>
