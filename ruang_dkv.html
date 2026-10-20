@@ -2,188 +2,1266 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#6d5dfc">
-<title>Ruang DKV</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DKV My Study Space</title>
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
 <style>
-:root{--bg:#f5f5fb;--panel:#fff;--panel2:#f0efff;--text:#24233a;--muted:#77758f;--line:#e8e6f3;--accent:#6d5dfc;--accent2:#8d80ff;--good:#26a879;--danger:#e45d75;--shadow:0 12px 34px #25204b0c}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;transition:background .2s,color .2s}
-body.dark{--bg:#14141c;--panel:#1e1e29;--panel2:#29263d;--text:#f0efff;--muted:#aaa7c1;--line:#343343;--accent:#9387ff;--accent2:#b1a8ff;--shadow:0 12px 34px #0003}
-button,input,textarea,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.app{min-height:100vh}.topbar{height:68px;display:flex;align-items:center;gap:13px;padding:0 18px;position:sticky;top:0;z-index:20;background:var(--panel);border-bottom:1px solid var(--line)}
-.iconbtn{border:0;background:transparent;color:var(--text);font-size:24px;width:40px;height:40px;border-radius:12px}.iconbtn:hover{background:var(--panel2)}
-.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.5px;font-size:18px}.brandmark{width:35px;height:35px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),#b3aaff);color:white;border-radius:12px;font-weight:900}
-.topspacer{flex:1}.datepill{color:var(--muted);font-size:12px}
-.shell{max-width:1200px;margin:auto;padding:22px 18px 60px}.pagehead{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:4px 0 20px}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:1.7px;color:var(--accent);font-weight:800}.pagehead h1{font-size:clamp(25px,4vw,34px);line-height:1.15;margin:5px 0 5px;letter-spacing:-1px}.sub{color:var(--muted);margin:0;font-size:13px}
-.btn{border:0;border-radius:12px;padding:10px 14px;background:var(--accent);color:#fff;font-weight:700;box-shadow:0 5px 12px #6d5dfc24}.btn:hover{filter:brightness(1.06)}.btn.secondary{background:var(--panel2);color:var(--text);box-shadow:none;border:1px solid var(--line)}.btn.danger{background:#fff0f2;color:var(--danger);box-shadow:none}.btn.small{padding:7px 10px;font-size:12px;border-radius:9px}.btnrow{display:flex;gap:8px;flex-wrap:wrap}
-.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:15px}.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow);min-width:0}.span12{grid-column:span 12}.span8{grid-column:span 8}.span7{grid-column:span 7}.span6{grid-column:span 6}.span5{grid-column:span 5}.span4{grid-column:span 4}
-.profile{padding:0;overflow:hidden}.banner{height:150px;background:linear-gradient(125deg,#5547d9,#9d83ff 55%,#e5dfff);background-position:center;background-size:cover;position:relative}.banner:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#18152b40,transparent 55%)}.profilebody{padding:0 20px 20px;position:relative}.avatar{width:92px;height:92px;border-radius:50%;object-fit:cover;border:5px solid var(--panel);background:var(--panel2);margin-top:-48px;position:relative;z-index:2}.profileline{display:flex;align-items:flex-end;gap:15px}.profiletext{padding:8px 0 0;min-width:0;flex:1}.profilename{font-size:24px;font-weight:850;letter-spacing:-.7px;line-height:1.25;overflow-wrap:anywhere}.profilebio{color:var(--muted);font-size:13px;margin-top:3px;overflow-wrap:anywhere}.editprofile{align-self:center;margin-top:12px}
-.sectiontitle{font-size:16px;font-weight:800;margin:0 0 14px;letter-spacing:-.25px;display:flex;align-items:center;justify-content:space-between;gap:8px}.muted{color:var(--muted)}.statgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.stat{background:var(--panel2);padding:14px;border-radius:15px;min-width:0}.staticon{font-size:19px}.statnum{font-size:25px;font-weight:850;letter-spacing:-1px;margin-top:5px}.statlabel{font-size:11px;color:var(--muted);line-height:1.35}.progress{height:7px;border-radius:20px;background:var(--line);overflow:hidden;margin-top:12px}.progress>span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:20px}
-.list{display:flex;flex-direction:column;gap:9px}.listitem{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--line);border-radius:14px;min-width:0}.listmain{min-width:0;flex:1}.listtitle{font-weight:750;overflow-wrap:anywhere}.listmeta{font-size:12px;color:var(--muted);margin-top:2px}.dot{width:9px;height:9px;background:var(--accent);border-radius:50%;flex-shrink:0}.empty{padding:25px 12px;text-align:center;color:var(--muted);font-size:13px;border:1px dashed var(--line);border-radius:14px}
-.daytabs{display:flex;gap:7px;overflow:auto;padding-bottom:4px;margin-bottom:15px}.daytab{border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:8px 13px;border-radius:11px;white-space:nowrap;font-weight:700;font-size:12px}.daytab.active{background:var(--accent);border-color:var(--accent);color:white}
-.event{display:flex;gap:13px;padding:14px 0;border-bottom:1px solid var(--line)}.event:last-child{border-bottom:0}.eventtime{width:92px;flex-shrink:0;color:var(--muted);font-size:12px;font-weight:700}.eventbody{border-left:3px solid var(--accent);padding-left:12px;min-width:0}.eventname{font-weight:800}.eventtag{font-size:11px;color:var(--muted);margin-top:3px}
-.field{display:flex;flex-direction:column;gap:6px;margin-bottom:13px}.field label{font-size:12px;font-weight:750;color:var(--muted)}.field input,.field textarea,.field select{width:100%;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:11px;padding:11px 12px;min-width:0}.field textarea{resize:vertical;min-height:100px}.field input[type=file]{padding:9px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}.full{grid-column:1/-1}
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}.search{flex:1;min-width:150px}.search input{width:100%;border:1px solid var(--line);background:var(--panel);color:var(--text);padding:10px 12px;border-radius:12px}
-.chip{display:inline-flex;align-items:center;gap:5px;padding:4px 8px;border-radius:8px;background:var(--panel2);color:var(--accent);font-size:10px;font-weight:800}.itemcard{border:1px solid var(--line);border-radius:16px;padding:15px;min-width:0}.itemtop{display:flex;gap:10px;align-items:flex-start}.itemtitle{font-weight:800;font-size:15px;overflow-wrap:anywhere;flex:1}.itembody{white-space:pre-wrap;overflow-wrap:anywhere;color:var(--muted);font-size:13px;margin:10px 0}.attachments{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.attachment{border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:7px 9px;font-size:12px;max-width:100%;overflow-wrap:anywhere;color:var(--text);text-decoration:none}.attachment img{width:100px;height:75px;object-fit:cover;border-radius:8px;display:block;margin-bottom:4px}.itemactions{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}.completed{opacity:.68}.completed .itemtitle{text-decoration:line-through}
-.menuoverlay{position:fixed;inset:0;background:#100d2366;z-index:39;opacity:0;pointer-events:none;transition:opacity .2s}.menuoverlay.show{opacity:1;pointer-events:auto}.drawer{position:fixed;z-index:40;top:0;bottom:0;left:0;width:min(310px,86vw);background:var(--panel);border-right:1px solid var(--line);padding:18px;transform:translateX(-105%);transition:transform .23s;display:flex;flex-direction:column;gap:7px}.drawer.show{transform:translateX(0)}.drawerhead{display:flex;align-items:center;justify-content:space-between;padding:4px 0 18px}.navbtn{border:0;background:transparent;color:var(--text);border-radius:12px;text-align:left;padding:12px;display:flex;align-items:center;gap:12px;font-weight:750}.navbtn.active,.navbtn:hover{background:var(--panel2);color:var(--accent)}.navicon{width:24px;text-align:center;font-size:18px}.drawerfoot{margin-top:auto;border-top:1px solid var(--line);padding-top:12px}
-.modalback{position:fixed;inset:0;background:#0c0b19a6;z-index:60;display:none;align-items:center;justify-content:center;padding:16px}.modalback.show{display:flex}.modal{background:var(--panel);border:1px solid var(--line);border-radius:20px;width:min(560px,100%);max-height:92vh;overflow:auto;padding:20px;box-shadow:0 25px 80px #0004}.modalhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px}.modalhead h2{font-size:20px;margin:0}.cropbox{height:240px;border-radius:14px;background:#171622;overflow:hidden;position:relative;touch-action:pan-y}.cropbox img{position:absolute;max-width:none;user-select:none;-webkit-user-drag:none;transform-origin:center}.cropguide{position:absolute;inset:0;border:2px solid #ffffffaa;pointer-events:none;box-shadow:inset 0 0 0 999px #0002}.cropguide:after{content:"";position:absolute;left:0;right:0;top:50%;border-top:1px solid #ffffff55}.cropguide:before{content:"";position:absolute;top:0;bottom:0;left:50%;border-left:1px solid #ffffff55}
-.note{font-size:12px;color:var(--muted);margin-top:8px}.switchrow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.switch{appearance:none;width:45px;height:26px;border-radius:20px;background:var(--line);position:relative;cursor:pointer;flex-shrink:0}.switch:checked{background:var(--accent)}.switch:after{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:white;transition:left .18s}.switch:checked:after{left:22px}
-.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:100;background:#242238;color:#fff;border-radius:12px;padding:11px 16px;box-shadow:0 8px 30px #0003;font-size:13px;transition:.2s;max-width:90vw;text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}.hidden{display:none!important}
-@media(max-width:760px){.shell{padding:17px 12px 40px}.topbar{padding:0 12px;height:62px}.datepill{display:none}.grid{gap:11px}.span8,.span7,.span6,.span5,.span4{grid-column:span 12}.card{padding:15px;border-radius:17px}.profile{padding:0}.banner{height:125px}.profilebody{padding:0 14px 16px}.avatar{width:80px;height:80px;margin-top:-40px}.profilename{font-size:22px}.profileline{gap:10px;align-items:center}.editprofile{margin-top:13px;padding:8px 10px}.statgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.pagehead{align-items:flex-start}.pagehead .btn{white-space:nowrap}.eventtime{width:80px}.formgrid{grid-template-columns:1fr}.full{grid-column:auto}.pagehead h1{font-size:27px}}
+:root {
+--bg-dark: #0f0c1b;
+--card-bg: #18142a;
+--card-border: #282244;
+--accent-purple: #7c3aed;
+--accent-light: #a78bfa;
+--accent-pink: #ec4899;
+--text-main: #f3f4f6;
+--text-sub: #9ca3af;
+--input-bg: #110e21;
+--sidebar-width: 240px;
+--badge-success: #10b981;
+--badge-pending: #f59e0b;
+}
+[data-theme="light"] {
+--bg-dark: #f1f3f9;
+--card-bg: #ffffff;
+--card-border: #e2e8f0;
+--accent-purple: #6d28d9;
+--accent-light: #8b5cf6;
+--text-main: #1f2937;
+--text-sub: #6b7280;
+--input-bg: #f8fafc;
+}
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+user-select: none;
+}
+body {
+background-color: var(--bg-dark);
+color: var(--text-main);
+display: flex;
+min-height: 100vh;
+overflow-x: hidden;
+}
+/* Sidebar */
+.sidebar {
+width: var(--sidebar-width);
+background: var(--card-bg);
+border-right: 1px solid var(--card-border);
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+padding: 20px 15px;
+position: fixed;
+height: 100vh;
+z-index: 100;
+transition: all 0.3s ease;
+}
+  .brand {
+display: flex;
+align-items: center;
+gap: 10px;
+font-weight: 800;
+font-size: 1.2rem;
+color: var(--text-main);
+margin-bottom: 30px;
+padding-left: 5px;
+}
+.brand-icon {
+width: 35px;
+height: 35px;
+background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+border-radius: 10px;
+display: flex;
+align-items: center;
+justify-content: center;
+color: white;
+}
+.nav-menu {
+display: flex;
+flex-direction: column;
+gap: 8px;
+flex-grow: 1;
+}
+.nav-item {
+display: flex;
+align-items: center;
+gap: 12px;
+padding: 12px 16px;
+border-radius: 12px;
+color: var(--text-sub);
+text-decoration: none;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.2s ease;
+}
+.nav-item:hover, .nav-item.active {
+background: var(--accent-purple);
+color: white;
+}
+  .sidebar-footer {
+display: flex;
+flex-direction: column;
+gap: 10px;
+border-top: 1px solid var(--card-border);
+padding-top: 15px;
+}
+/* Theme Switch */
+.theme-switch {
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 10px;
+color: var(--text-sub);
+}
+.toggle-checkbox {
+appearance: none;
+width: 40px;
+height: 22px;
+background: var(--card-border);
+border-radius: 20px;
+position: relative;
+cursor: pointer;
+outline: none;
+transition: background 0.3s;
+}
+.toggle-checkbox:checked {
+background: var(--accent-purple);
+}
+.toggle-checkbox::before {
+content: '';
+position: absolute;
+width: 16px;
+height: 16px;
+border-radius: 50%;
+top: 3px;
+left: 3px;
+background: white;
+transition: 0.3s;
+}
+.toggle-checkbox:checked::before {
+left: 21px;
+}
+  /* Main Content Area */
+.main-content {
+margin-left: var(--sidebar-width);
+flex: 1;
+padding: 25px;
+max-width: calc(100vw - var(--sidebar-width));
+min-height: 100vh;
+}
+.page {
+display: none;
+animation: fadeIn 0.3s ease;
+}
+.page.active {
+display: block;
+}
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(5px); }
+to { opacity: 1; transform: translateY(0); }
+}
+/* Banner & Profile Header (Discord Style) */
+.profile-card {
+background: var(--card-bg);
+border-radius: 20px;
+border: 1px solid var(--card-border);
+overflow: hidden;
+margin-bottom: 25px;
+position: relative;
+}
+  .profile-banner {
+height: 160px;
+background: linear-gradient(to right, #4c1d95, #831843);
+background-size: cover;
+background-position: center;
+position: relative;
+}
+.profile-body {
+padding: 20px 25px 25px 25px;
+position: relative;
+display: flex;
+justify-content: space-between;
+align-items: flex-end;
+}
+.profile-avatar-wrapper {
+position: absolute;
+top: -60px;
+left: 25px;
+}
+.profile-avatar {
+width: 110px;
+height: 110px;
+border-radius: 50%;
+border: 5px solid var(--card-bg);
+background: #312e81;
+object-fit: cover;
+background-size: cover;
+background-position: center;
+}
+.profile-info {
+margin-left: 135px;
+}
+  .profile-name {
+font-size: 1.5rem;
+font-weight: 700;
+display: flex;
+align-items: center;
+gap: 10px;
+}
+.profile-status {
+font-size: 0.9rem;
+color: var(--text-sub);
+margin-top: 2px;
+}
+.profile-bio {
+margin-top: 8px;
+font-size: 0.85rem;
+color: var(--text-main);
+font-style: italic;
+}
+.edit-profile-btn {
+background: var(--card-border);
+color: var(--text-main);
+border: none;
+padding: 8px 16px;
+border-radius: 10px;
+cursor: pointer;
+display: flex;
+align-items: center;
+gap: 8px;
+font-size: 0.85rem;
+transition: 0.2s;
+}
+.edit-profile-btn:hover {
+background: var(--accent-purple);
+color: white;
+}
+/* Stats Grid */
+.stats-grid {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 15px;
+margin-bottom: 25px;
+  }
+  .stat-card {
+background: var(--card-bg);
+border: 1px solid var(--card-border);
+border-radius: 16px;
+padding: 18px;
+display: flex;
+align-items: center;
+gap: 15px;
+}
+.stat-icon {
+width: 45px;
+height: 45px;
+border-radius: 12px;
+display: flex;
+align-items: center;
+justify-content: center;
+color: white;
+}
+.stat-val {
+font-size: 1.4rem;
+font-weight: 700;
+}
+.stat-label {
+font-size: 0.8rem;
+color: var(--text-sub);
+}
+/* Grid Layouts for Sections */
+.dashboard-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 20px;
+}
+  .section-card {
+background: var(--card-bg);
+border: 1px solid var(--card-border);
+border-radius: 18px;
+padding: 20px;
+}
+.section-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 15px;
+}
+.section-title {
+font-size: 1.1rem;
+font-weight: 600;
+}
+.see-all-btn {
+color: var(--accent-light);
+text-decoration: none;
+font-size: 0.85rem;
+cursor: pointer;
+}
+/* List Items */
+.item-list {
+display: flex;
+flex-direction: column;
+gap: 12px;
+}
+.task-item {
+background: var(--input-bg);
+border: 1px solid var(--card-border);
+border-radius: 12px;
+padding: 12px 15px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+  .task-left {
+display: flex;
+align-items: center;
+gap: 12px;
+}
+.task-icon {
+width: 36px;
+height: 36px;
+border-radius: 8px;
+display: flex;
+align-items: center;
+justify-content: center;
+color: white;
+}
+.task-title {
+font-size: 0.9rem;
+font-weight: 600;
+}
+.task-meta {
+font-size: 0.75rem;
+color: var(--text-sub);
+margin-top: 2px;
+}
+.badge {
+padding: 4px 10px;
+border-radius: 20px;
+font-size: 0.75rem;
+font-weight: 600;
+}
+.badge-pending {
+background: rgba(245, 158, 11, 0.15);
+color: var(--badge-pending);
+}
+.badge-done {
+background: rgba(16, 185, 129, 0.15);
+color: var(--badge-success);
+}
+  .semester-tag {
+background: rgba(124, 58, 237, 0.2);
+color: var(--accent-light);
+padding: 2px 8px;
+border-radius: 6px;
+font-size: 0.7rem;
+margin-left: 6px;
+}
+/* Schedule UI */
+.schedule-day-group {
+margin-bottom: 20px;
+}
+.schedule-day-title {
+font-size: 1rem;
+font-weight: 700;
+color: var(--accent-light);
+margin-bottom: 10px;
+display: flex;
+align-items: center;
+gap: 6px;
+}
+.schedule-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+gap: 10px;
+}
+.schedule-card {
+background: var(--input-bg);
+border: 1px solid var(--card-border);
+border-radius: 12px;
+padding: 12px;
+display: flex;
+align-items: center;
+gap: 10px;
+}
+  /* Cards Grid (Jurnal & Ide) */
+.cards-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+gap: 20px;
+}
+.content-card {
+background: var(--card-bg);
+border: 1px solid var(--card-border);
+border-radius: 16px;
+overflow: hidden;
+display: flex;
+flex-direction: column;
+}
+.content-card-img {
+height: 140px;
+width: 100%;
+object-fit: cover;
+background: var(--input-bg);
+}
+.content-card-body {
+padding: 15px;
+flex-grow: 1;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+}
+.content-card-title {
+font-weight: 600;
+font-size: 0.95rem;
+margin-bottom: 6px;
+}
+.content-card-desc {
+font-size: 0.8rem;
+color: var(--text-sub);
+margin-bottom: 12px;
+line-height: 1.4;
+}
+  .tags-container {
+display: flex;
+gap: 6px;
+flex-wrap: wrap;
+}
+.tag {
+background: var(--input-bg);
+border: 1px solid var(--card-border);
+padding: 2px 8px;
+border-radius: 6px;
+font-size: 0.7rem;
+color: var(--text-sub);
+}
+/* Modals */
+.modal-overlay {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: rgba(0, 0, 0, 0.75);
+backdrop-filter: blur(5px);
+z-index: 1000;
+display: none;
+align-items: center;
+justify-content: center;
+padding: 20px;
+}
+.modal-overlay.active {
+display: flex;
+}
+.modal-card {
+background: var(--card-bg);
+border: 1px solid var(--card-border);
+border-radius: 20px;
+width: 100%;
+max-width: 500px;
+max-height: 90vh;
+overflow-y: auto;
+padding: 25px;
+  }
+  .modal-title {
+font-size: 1.2rem;
+font-weight: 700;
+margin-bottom: 20px;
+}
+.form-group {
+margin-bottom: 15px;
+}
+.form-group label {
+display: block;
+font-size: 0.8rem;
+color: var(--text-sub);
+margin-bottom: 6px;
+}
+.form-control {
+width: 100%;
+background: var(--input-bg);
+border: 1px solid var(--card-border);
+padding: 10px 14px;
+border-radius: 10px;
+color: var(--text-main);
+outline: none;
+}
+.btn {
+padding: 10px 18px;
+border-radius: 10px;
+border: none;
+font-weight: 600;
+cursor: pointer;
+display: inline-flex;
+align-items: center;
+gap: 8px;
+}
+.btn-primary {
+background: var(--accent-purple);
+color: white;
+}
+.btn-secondary {
+background: var(--card-border);
+color: var(--text-main);
+}
+/* Cropper Canvas Container */
+.cropper-container {
+width: 100%;
+height: 220px;
+background: #000;
+position: relative;
+overflow: hidden;
+border-radius: 12px;
+margin-bottom: 15px;
+}
+  #cropCanvas {
+width: 100%;
+height: 100%;
+cursor: move;
+}
+.crop-controls {
+display: flex;
+gap: 10px;
+margin-bottom: 15px;
+justify-content: center;
+}
+/* Tabs Bar */
+.tabs-bar {
+display: flex;
+gap: 10px;
+margin-bottom: 20px;
+}
+.tab-btn {
+padding: 8px 16px;
+border-radius: 20px;
+background: var(--card-bg);
+border: 1px solid var(--card-border);
+color: var(--text-sub);
+cursor: pointer;
+font-size: 0.85rem;
+}
+.tab-btn.active {
+background: var(--accent-purple);
+color: white;
+border-color: var(--accent-purple);
+}
+/* Attached File Preview */
+.file-attachment-badge {
+display: flex;
+align-items: center;
+gap: 6px;
+background: rgba(124, 58, 237, 0.1);
+border: 1px dashed var(--accent-purple);
+padding: 6px 10px;
+border-radius: 8px;
+font-size: 0.75rem;
+color: var(--accent-light);
+margin-top: 6px;
+text-decoration: none;
+}
+  /* Responsive Mobile UI */
+@media (max-width: 768px) {
+.sidebar {
+width: 100%;
+height: auto;
+position: fixed;
+bottom: 0;
+top: auto;
+border-right: none;
+border-top: 1px solid var(--card-border);
+padding: 8px;
+flex-direction: row;
+}
+.brand, .sidebar-footer { display: none; }
+.nav-menu { flex-direction: row; justify-content: space-around; width: 100%; }
+.nav-item { flex-direction: column; gap: 4px; font-size: 0.65rem; padding: 6px; }
+.main-content { margin-left: 0; max-width: 100vw; padding: 15px; padding-bottom: 80px; }
+.stats-grid { grid-template-columns: repeat(2, 1fr); }
+.dashboard-grid { grid-template-columns: 1fr; }
+.profile-info { margin-left: 0; margin-top: 60px; }
+.profile-body { flex-direction: column; align-items: flex-start; }
+.edit-profile-btn { margin-top: 10px; width: 100%; justify-content: center; }
+}
 </style>
 </head>
-<body>
-<div class="app">
-<header class="topbar">
-  <button class="iconbtn" id="menuBtn" aria-label="Buka menu">☰</button>
-  <div class="brand"><div class="brandmark">D</div><span>Ruang DKV</span></div>
-  <div class="topspacer"></div><div class="datepill" id="todayLabel"></div>
-  <button class="iconbtn" id="themeQuick" aria-label="Ganti tema" title="Ganti tema">☼</button>
-</header>
-<main class="shell" id="main"></main>
+<body data-theme="dark">
+<!-- Sidebar -->
+<aside class="sidebar">
+<div>
+<div class="brand">
+<div class="brand-icon"><i data-lucide="shapes"></i></div>
+<span>DKV Space</span>
 </div>
-<div class="menuoverlay" id="overlay"></div>
-<aside class="drawer" id="drawer" aria-label="Navigasi">
-  <div class="drawerhead"><div class="brand"><div class="brandmark">D</div><span>Ruang DKV</span></div><button class="iconbtn" id="closeMenu">×</button></div>
-  <button class="navbtn active" data-page="home"><span class="navicon">⌂</span>Beranda</button>
-  <button class="navbtn" data-page="schedule"><span class="navicon">▦</span>Jadwal</button>
-  <button class="navbtn" data-page="tasks"><span class="navicon">☑</span>Tugas</button>
-  <button class="navbtn" data-page="journal"><span class="navicon">▤</span>Jurnal Pembelajaran</button>
-  <button class="navbtn" data-page="ideas"><span class="navicon">✧</span>Ide</button>
-  <div class="drawerfoot"><button class="navbtn" data-page="settings"><span class="navicon">⚙</span>Pengaturan</button><div class="note">Data disimpan di perangkat ini. Tidak perlu akun.</div></div>
+<nav class="nav-menu">
+<div class="nav-item active" onclick="switchPage('beranda')">
+<i data-lucide="layout-dashboard"></i>
+<span>Beranda</span>
+</div>
+<div class="nav-item" onclick="switchPage('jadwal')">
+<i data-lucide="calendar"></i>
+<span>Jadwal</span>
+</div>
+<div class="nav-item" onclick="switchPage('tugas')">
+<i data-lucide="check-square"></i>
+<span>Tugas</span>
+</div>
+<div class="nav-item" onclick="switchPage('jurnal')">
+<i data-lucide="book-open"></i>
+<span>Jurnal</span>
+</div>
+<div class="nav-item" onclick="switchPage('ide')">
+<i data-lucide="lightbulb"></i>
+<span>Ide</span>
+</div>
+</nav>
+</div>
+<div class="sidebar-footer">
+<div class="nav-item" onclick="switchPage('pengaturan')">
+<i data-lucide="settings"></i>
+<span>Pengaturan</span>
+</div>
+<div class="theme-switch">
+<span style="font-size:0.8rem;"><i data-lucide="moon" style="width:14px;"></i> Mode Gelap</span>
+<input type="checkbox" id="themeToggle" class="toggle-checkbox" onchange="toggleTheme()">
+</div>
+</div>
 </aside>
-<div class="modalback" id="modalback"><section class="modal" id="modal"></section></div>
-<div class="toast" id="toast"></div>
+<!-- Main Content -->
+<main class="main-content">
+<!-- PAGE: BERANDA -->
+<div id="page-beranda" class="page active">
+<div class="profile-card">
+<div class="profile-banner" id="displayBanner"></div>
+<div class="profile-body">
+<div class="profile-avatar-wrapper">
+<div class="profile-avatar" id="displayAvatar"></div>
+</div>
+<div class="profile-info">
+<div class="profile-name">
+<span id="displayName">Zaldy</span>
+<span class="semester-tag" id="displaySemesterTag">Semester 3</span>
+</div>
+<div class="profile-status" id="displayStatus">Mahasiswa DKV</div>
+<div class="profile-bio" id="displayBio">"Sedikit demi sedikit, pasti jadi."</div>
+</div>
+<button class="edit-profile-btn" onclick="switchPage('pengaturan')">
+<i data-lucide="edit-3" style="width:14px;"></i> Edit Profil
+</button>
+</div>
+</div>
+<!-- Stats Grid -->
+<div class="stats-grid">
+<div class="stat-card">
+<div class="stat-icon" style="background:#8b5cf6;"><i data-lucide="check-square"></i></div>
+<div>
+<div class="stat-val" id="statTugasCount">0</div>
+<div class="stat-label">Total Tugas</div>
+</div>
+</div>
+<div class="stat-card">
+<div class="stat-icon" style="background:#ec4899;"><i data-lucide="book-open"></i></div>
+<div>
+<div class="stat-val" id="statJurnalCount">0</div>
+<div class="stat-label">Jurnal</div>
+</div>
+</div>
+<div class="stat-card">
+<div class="stat-icon" style="background:#f59e0b;"><i data-lucide="lightbulb"></i></div>
+<div>
+<div class="stat-val" id="statIdeCount">0</div>
+<div class="stat-label">Ide</div>
+</div>
+</div>
+<div class="stat-card">
+<div class="stat-icon" style="background:#10b981;"><i data-lucide="bookmark"></i></div>
+<div>
+<div class="stat-val" id="statRefCount">0</div>
+<div class="stat-label">Referensi</div>
+</div>
+</div>
+</div>
+<div class="dashboard-grid">
+<div class="section-card">
+<div class="section-header">
+<span class="section-title">Tugas Terbaru</span>
+<span class="see-all-btn" onclick="switchPage('tugas')">Lihat Semua</span>
+</div>
+<div class="item-list" id="dashTaskList"></div>
+</div>
+<div class="section-card">
+<div class="section-header">
+<span class="section-title">Jadwal Hari Ini</span>
+<span class="see-all-btn" onclick="switchPage('jadwal')">Lihat Jadwal</span>
+</div>
+<div class="item-list" id="dashScheduleList"></div>
+</div>
+</div>
+</div>
+<!-- PAGE: JADWAL -->
+<div id="page-jadwal" class="page">
+<div class="section-header" style="margin-bottom:20px;">
+<h2>Jadwal Kuliah</h2>
+</div>
+<div id="scheduleContainer"></div>
+</div>
+<!-- PAGE: TUGAS -->
+<div id="page-tugas" class="page">
+<div class="section-header" style="margin-bottom:20px;">
+<h2>Daftar Tugas</h2>
+<button class="btn btn-primary" onclick="openTaskModal()"><i data-lucide="plus"></i> Tambah Tugas</button>
+</div>
+<div class="tabs-bar">
+<button class="tab-btn active" onclick="filterTasks('all', this)">Semua</button>
+<button class="tab-btn" onclick="filterTasks('pending', this)">Belum Selesai</button>
+<button class="tab-btn" onclick="filterTasks('done', this)">Selesai</button>
+</div>
+<div class="item-list" id="fullTaskList"></div>
+</div>
+<!-- PAGE: JURNAL -->
+<div id="page-jurnal" class="page">
+<div class="section-header" style="margin-bottom:20px;">
+<h2>Jurnal Pembelajaran</h2>
+<button class="btn btn-primary" onclick="openMediaModal('Jurnal')"><i data-lucide="plus"></i> Tambah Jurnal</button>
+</div>
+<div class="cards-grid" id="jurnalGrid"></div>
+</div>
+<!-- PAGE: IDE -->
+<div id="page-ide" class="page">
+<div class="section-header" style="margin-bottom:20px;">
+<h2>Ide & Referensi Visual</h2>
+<button class="btn btn-primary" onclick="openMediaModal('Ide')"><i data-lucide="plus"></i> Tambah Ide</button>
+</div>
+<div class="cards-grid" id="ideGrid"></div>
+</div>
+<!-- PAGE: PENGATURAN -->
+<div id="page-pengaturan" class="page">
+<h2 style="margin-bottom:20px;">Pengaturan Profil & Jadwal</h2>
+<div class="tabs-bar">
+<button class="tab-btn active" onclick="switchSettingTab('profile', this)">Edit Profil</button>
+<button class="tab-btn" onclick="switchSettingTab('schedule', this)">Edit Jadwal Matkul</button>
+</div>
+<div id="settingTabProfile">
+<div class="section-card" style="max-width:600px;">
+<div class="form-group">
+<label>Nama Lengkap</label>
+<input type="text" id="inputName" class="form-control">
+</div>
+<div class="form-group">
+<label>Semester Sekarang</label>
+<input type="number" id="inputSemester" class="form-control" placeholder="Contoh: 3">
+</div>
+<div class="form-group">
+<label>Status / Program Studi</label>
+<input type="text" id="inputStatus" class="form-control">
+</div>
+<div class="form-group">
+<label>Bio Singkat</label>
+<textarea id="inputBio" class="form-control" rows="3"></textarea>
+</div>
+<div class="form-group">
+<label>Ganti Foto Profil (Avatar)</label>
+<input type="file" id="fileAvatar" accept="image/*" class="form-control" onchange="initCropper(this, 'avatar')">
+</div>
+<div class="form-group">
+<label>Ganti Banner Profil</label>
+<input type="file" id="fileBanner" accept="image/*" class="form-control" onchange="initCropper(this, 'banner')">
+</div>
+<button class="btn btn-primary" onclick="saveProfileSettings()">Simpan Perubahan Profil</button>
+</div>
+</div>
+<div id="settingTabSchedule" style="display:none;">
+<div class="section-card" style="max-width:700px;">
+<h3 style="margin-bottom:15px; font-size:1rem;">Kelola Mata Kuliah</h3>
+<div class="form-group">
+<label>Hari</label>
+<select id="schedDay" class="form-control">
+<option value="Senin">Senin</option>
+<option value="Selasa">Selasa</option>
+<option value="Rabu">Rabu</option>
+<option value="Kamis">Kamis</option>
+<option value="Jumat">Jumat</option>
+</select>
+</div>
+<div class="form-group">
+<label>Nama Mata Kuliah</label>
+<input type="text" id="schedName" class="form-control" placeholder="Misal: Tipografi 2">
+</div>
+<div class="form-group">
+<label>Jam Kuliah</label>
+<input type="text" id="schedTime" class="form-control" placeholder="09:00 - 11:30">
+</div>
+<button class="btn btn-primary" onclick="addScheduleItem()">Tambah / Update Matkul</button>
+<hr style="border-color:var(--card-border); margin:20px 0;">
+<div id="scheduleEditorList"></div>
+</div>
+</div>
+</div>
+</main>
+<!-- MODAL: CROPPER GAMBAR -->
+<div class="modal-overlay" id="cropModal">
+<div class="modal-card">
+<div class="modal-title">Potong / Adjust Gambar</div>
+<div class="cropper-container">
+<canvas id="cropCanvas"></canvas>
+</div>
+<div class="crop-controls">
+<button class="btn btn-secondary" onclick="adjustZoom(1.1)"><i data-lucide="zoom-in"></i> Zoom In</button>
+<button class="btn btn-secondary" onclick="adjustZoom(0.9)"><i data-lucide="zoom-out"></i> Zoom Out</button>
+</div>
+<div style="display:flex; justify-content:flex-end; gap:10px;">
+<button class="btn btn-secondary" onclick="closeCropper()">Batal</button>
+<button class="btn btn-primary" onclick="applyCrop()">Terapkan & Simpan</button>
+</div>
+</div>
+</div>
+<!-- MODAL: TAMBAH/EDIT TUGAS -->
+<div class="modal-overlay" id="taskModal">
+<div class="modal-card">
+<div class="modal-title" id="taskModalTitle">Tambah Tugas Baru</div>
+<input type="hidden" id="taskId">
+<div class="form-group">
+<label>Mata Kuliah / Judul Tugas</label>
+<input type="text" id="taskInputTitle" class="form-control" placeholder="Contoh: Storyboard Proyek Akhir">
+</div>
+<div class="form-group">
+<label>Kategori / Tag</label>
+<input type="text" id="taskInputTag" class="form-control" placeholder="Contoh: Animasi 2D, Desain, Video">
+</div>
+<div class="form-group">
+<label>Batas Waktu (Deadline)</label>
+<input type="text" id="taskInputDeadline" class="form-control" placeholder="Contoh: Batas: 24 Okt 2026">
+</div>
+<div class="form-group">
+<label>Lampiran File / Gambar (Opsional)</label>
+<input type="file" id="taskInputFile" class="form-control" onchange="handleTaskFileUpload(this)">
+<div id="taskFileStatus"></div>
+</div>
+<div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+<button class="btn btn-secondary" onclick="closeTaskModal()">Batal</button>
+<button class="btn btn-primary" onclick="saveTask()">Simpan Tugas</button>
+</div>
+</div>
+</div>
+<!-- MODAL: TAMBAH MEDIA (JURNAL / IDE) -->
+<div class="modal-overlay" id="mediaModal">
+<div class="modal-card">
+<div class="modal-title" id="mediaModalTitle">Tambah Jurnal Pembelajaran</div>
+<input type="hidden" id="mediaType">
+<div class="form-group">
+<label>Judul</label>
+<input type="text" id="mediaInputTitle" class="form-control" placeholder="Judul entri...">
+</div>
+<div class="form-group">
+<label>Deskripsi / Catatan Refleksi</label>
+<textarea id="mediaInputDesc" class="form-control" rows="3" placeholder="Tuliskan catatan pembelajaran atau ide..."></textarea>
+</div>
+<div class="form-group">
+<label>Unggah Gambar / Referensi Visual</label>
+<input type="file" id="mediaInputImage" accept="image/*" class="form-control" onchange="handleMediaImageUpload(this)">
+</div>
+<div class="form-group">
+<label>Tag (pisahkan koma)</label>
+<input type="text" id="mediaInputTags" class="form-control" placeholder="Fotografi, Sketsa, Referensi">
+</div>
+<div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+<button class="btn btn-secondary" onclick="closeMediaModal()">Batal</button>
+<button class="btn btn-primary" onclick="saveMedia()">Simpan</button>
+</div>
+</div>
+</div>
 <script>
-(() => {
-'use strict';
-const $ = s => document.querySelector(s);
-const $$ = s => [...document.querySelectorAll(s)];
-const DB_NAME='ruang-dkv-db', STORE='records', STATE_KEY='appState';
-let db, currentPage='home', selectedDay=dayName(new Date()), editRecordId=null, cropTarget='avatar', cropImage=null, cropScale=1, cropX=0,cropY=0,cropDragging=false,cropStart=null;
-const courses=[
- {day:'Senin',name:'Creative Thinking',start:'09:30',end:'12:00'},
- {day:'Senin',name:'Sound Design',start:'13:00',end:'15:30'},
- {day:'Selasa',name:'Sinematografi',start:'09:00',end:'12:00'},
- {day:'Selasa',name:'Animasi 2D',start:'13:00',end:'16:20'},
- {day:'Rabu',name:'Fotografi Komersial',start:'08:40',end:'11:10'},
- {day:'Rabu',name:'Tipografi',start:'13:00',end:'15:30'},
- {day:'Kamis',name:'Storyboard',start:'13:00',end:'15:30'}
+// DATA DEFAULT STORAGE
+const DEFAULT_PROFILE = {
+name: "Zaldy",
+status: "Mahasiswa DKV",
+bio: "Sedikit demi sedikit, pasti jadi.",
+semester: 3,
+avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80",
+banner: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80"
+};
+const DEFAULT_SCHEDULE = {
+"Senin": [
+{ name: "Creative thinking", time: "09:30 - 12:00" },
+{ name: "Sound design", time: "13:00 - 15:30" }
+],
+"Selasa": [
+{ name: "Sinematografi", time: "09:00 - 12:00" },
+{ name: "Animasi 2D", time: "13:00 - 16:20" }
+],
+"Rabu": [
+{ name: "Fotografi komersial", time: "08:40 - 11:10" },
+{ name: "Tipografi", time: "13:00 - 15:30" }
+],
+"Kamis": [
+{ name: "Storyboard", time: "13:00 - 15:30" }
+],
+"Jumat": []
+};
+const DEFAULT_TASKS = [
+{ id: '1', title: 'Tugas Animasi 2D', tag: 'Animasi', deadline: 'Batas: 18 Okt 2026', done: false, semester: 3, file: null },
+{ id: '2', title: 'Tugas Sinematografi', tag: 'Video', deadline: 'Batas: 16 Okt 2026', done: false, semester: 3, file: null },
+{ id: '3', title: 'Tugas Tipografi', tag: 'Desain', deadline: 'Batas: 14 Okt 2026', done: true, semester: 3, file: null },
+{ id: '4', title: 'Tugas Fotografi Komersial', tag: 'Foto', deadline: 'Batas: 12 Okt 2026', done: true, semester: 3, file: null }
 ];
-const days=['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
-const defaultState={profile:{name:'Anonim',bio:'Mahasiswa Desain Komunikasi Visual',avatar:'',banner:''},theme:'light',customSchedules:[],tasks:[],journals:[],ideas:[],references:[],books:[]};
-let state=loadState();
-function loadState(){try{return {...structuredClone(defaultState),...JSON.parse(localStorage.getItem(STATE_KEY)||'{}'),profile:{...defaultState.profile,...(JSON.parse(localStorage.getItem(STATE_KEY)||'{}').profile||{})}}}catch(e){return structuredClone(defaultState)}}
-function openStateDB(){return new Promise((resolve,reject)=>{if(!('indexedDB' in window)){resolve(null);return}let req=indexedDB.open(DB_NAME,1);req.onupgradeneeded=()=>{let d=req.result;if(!d.objectStoreNames.contains(STORE))d.createObjectStore(STORE)};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)})}
-function saveState(){try{localStorage.setItem(STATE_KEY,JSON.stringify(state))}catch(e){/* IndexedDB below supports larger local attachments. */}if(db){try{let tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).put(state,STATE_KEY);tx.onerror=()=>toast('Gagal menyimpan. Coba ekspor cadangan dan kurangi ukuran lampiran.')}catch(e){toast('Penyimpanan lokal bermasalah. Ekspor cadangan jika memungkinkan.')}}}
-async function initPersistence(){try{db=await openStateDB();if(db){let saved=await new Promise((resolve,reject)=>{let req=db.transaction(STORE,'readonly').objectStore(STORE).get(STATE_KEY);req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)});if(saved&&typeof saved==='object'){state={...structuredClone(defaultState),...saved,profile:{...defaultState.profile,...(saved.profile||{})}}}}}catch(e){db=null}render()}
-function dayName(d){return ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'][d.getDay()]}
-function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,8)}
-function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function fmtDate(d=new Date()){return d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}
-function fmtTime(t){return t||'--:--'}
-function toast(msg){let el=$('#toast');el.textContent=msg;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('show'),2700)}
-function applyTheme(){document.body.classList.toggle('dark',state.theme==='dark');$('#themeQuick').textContent=state.theme==='dark'?'☾':'☼';$('#themeQuick').title=state.theme==='dark'?'Gunakan tema cerah':'Gunakan tema gelap'}
-function openMenu(){$('#drawer').classList.add('show');$('#overlay').classList.add('show')}
-function closeMenu(){$('#drawer').classList.remove('show');$('#overlay').classList.remove('show')}
-function navigate(page){currentPage=page;closeMenu();render();$$('.navbtn[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page))}
-function modal(content){$('#modal').innerHTML=content;$('#modalback').classList.add('show')}
-function closeModal(){$('#modalback').classList.remove('show');$('#modal').innerHTML='';editRecordId=null}
-function empty(msg){return `<div class="empty">${esc(msg)}</div>`}
-function titleBlock(eyebrow,title,sub,action=''){return `<div class="pagehead"><div><div class="eyebrow">${eyebrow}</div><h1>${title}</h1><p class="sub">${sub}</p></div>${action}</div>`}
-function cardStats(){let done=state.tasks.filter(x=>x.done).length;return `<div class="statgrid">
-<div class="stat"><div class="staticon">☑</div><div class="statnum">${state.tasks.length}</div><div class="statlabel">Total tugas</div></div>
-<div class="stat"><div class="staticon">✓</div><div class="statnum">${done}</div><div class="statlabel">Tugas selesai</div></div>
-<div class="stat"><div class="staticon">▤</div><div class="statnum">${state.journals.length}</div><div class="statlabel">Jurnal belajar</div></div>
-<div class="stat"><div class="staticon">✧</div><div class="statnum">${state.ideas.length}</div><div class="statlabel">Ide tersimpan</div></div></div>`}
-function avatarFallback(){return `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><defs><linearGradient id="g"><stop stop-color="#6d5dfc"/><stop offset="1" stop-color="#b8aaff"/></linearGradient></defs><rect width="200" height="200" rx="100" fill="url(#g)"/><circle cx="100" cy="75" r="36" fill="#fff" opacity=".92"/><path d="M30 190c5-48 34-70 70-70s65 22 70 70" fill="#fff" opacity=".92"/></svg>`}
-function profileCard(){let avatar=state.profile.avatar||'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(avatarFallback());let banner=state.profile.banner?`style="background-image:url('${state.profile.banner}')"`:'';return `<section class="card profile span12"><div class="banner" ${banner}></div><div class="profilebody"><div class="profileline"><img class="avatar" src="${avatar}" alt="Foto profil"><div class="profiletext"><div class="profilename">${esc(state.profile.name||'Anonim')}</div><div class="profilebio">${esc(state.profile.bio||'Mahasiswa Desain Komunikasi Visual')}</div></div><button class="btn secondary editprofile" data-action="edit-profile">✎ Edit profil</button></div></div></section>`}
-function sortedSchedule(day){return [...courses.filter(x=>x.day===day).map(x=>({...x,fixed:true})),...state.customSchedules.filter(x=>x.day===day).map(x=>({...x,fixed:false}))].sort((a,b)=>a.start.localeCompare(b.start))}
-function eventHTML(e){return `<div class="event"><div class="eventtime">${fmtTime(e.start)}<br>↓<br>${fmtTime(e.end)}</div><div class="eventbody"><div class="eventname">${esc(e.name)}</div><div class="eventtag">${e.fixed?'Jadwal Matkul':'Jadwal custom'}${e.note?' · '+esc(e.note):''}</div>${!e.fixed?`<div class="itemactions"><button class="btn secondary small" data-action="edit-schedule" data-id="${e.id}">Edit</button><button class="btn secondary small" data-action="delete-schedule" data-id="${e.id}">Hapus</button></div>`:''}</div></div>`}
-function homePage(){let today=dayName(new Date()),ev=sortedSchedule(today);let upcoming=state.tasks.filter(x=>!x.done).slice(0,3);return `${titleBlock('RUANG KREATIFMU',`Halo, ${esc(state.profile.name||'Anonim')}! 👋`,'Satu tempat untuk mengatur kuliah, tugas, dan inspirasi DKV.')}
-<div class="grid">${profileCard()}
-<section class="card span12"><div class="sectiontitle">Ringkasan aktivitas <span class="chip">SEMESTER INI</span></div>${cardStats()}<div class="progress"><span style="width:${state.tasks.length?Math.round(state.tasks.filter(x=>x.done).length/state.tasks.length*100):0}%"></span></div><div class="note">${state.tasks.length?Math.round(state.tasks.filter(x=>x.done).length/state.tasks.length*100)+'% tugas sudah selesai':'Tambahkan tugas pertamamu untuk mulai melacak progres.'}</div></section>
-<section class="card span6"><div class="sectiontitle">Jadwal hari ini <span class="chip">${esc(today.toUpperCase())}</span></div>${ev.length?ev.map(eventHTML).join(''):empty(today==='Jumat'?'Hari ini kosong. Waktunya istirahat atau berkarya!':'Tidak ada kelas terjadwal hari ini.')}<div style="margin-top:13px"><button class="btn secondary small" data-action="goto-schedule">Lihat semua jadwal →</button></div></section>
-<section class="card span6"><div class="sectiontitle">Tugas yang perlu dikerjakan <button class="btn secondary small" data-action="new-task">+ Tambah</button></div>${upcoming.length?`<div class="list">${upcoming.map(t=>`<div class="listitem"><span class="dot"></span><div class="listmain"><div class="listtitle">${esc(t.title)}</div><div class="listmeta">${esc(t.course||'Umum')}${t.due?' · Tenggat '+esc(t.due):''}</div></div></div>`).join('')}</div>`:empty('Belum ada tugas aktif. Nikmati ruang kosongmu, atau tambahkan tugas baru.')}<div style="margin-top:13px"><button class="btn secondary small" data-action="goto-tasks">Buka daftar tugas →</button></div></section>
-<section class="card span4"><div class="sectiontitle">Jurnal belajar <span>▤</span></div><p class="sub">Catat materi, lampirkan foto papan tulis, PDF, atau file kuliah.</p><button class="btn secondary small" style="margin-top:14px" data-action="new-journal">+ Tulis jurnal</button></section>
-<section class="card span4"><div class="sectiontitle">Bank ide <span>✧</span></div><p class="sub">Simpan inspirasi visual, sketsa, gambar, dan file referensi.</p><button class="btn secondary small" style="margin-top:14px" data-action="new-idea">+ Simpan ide</button></section>
-<section class="card span4"><div class="sectiontitle">Referensi & buku <span>⌕</span></div><p class="sub">${state.references.length} referensi · ${state.books.length} buku tersimpan sebagai catatan teks.</p><button class="btn secondary small" style="margin-top:14px" data-action="goto-journal">Kelola catatan →</button></section></div>`}
-function schedulePage(){return `${titleBlock('ATUR WAKTUMU','Jadwal kuliah','Jadwal matkul tetap dan jadwal custom dalam satu tampilan.',`<button class="btn" data-action="new-schedule">＋ Jadwal custom</button>`)}
-<div class="grid"><section class="card span12"><div class="sectiontitle">Jadwal Matkul <span class="chip">TETAP</span></div><p class="sub" style="margin-bottom:14px">Jadwal perkuliahan yang sudah kamu berikan.</p><div class="list">${courses.map(c=>`<div class="listitem"><span class="dot"></span><div class="listmain"><div class="listtitle">${esc(c.name)}</div><div class="listmeta">${c.day} · ${c.start}–${c.end}</div></div><span class="chip">${c.day.slice(0,3).toUpperCase()}</span></div>`).join('')}</div></section>
-<section class="card span12"><div class="sectiontitle">Agenda per hari <span class="muted" style="font-size:12px;font-weight:500">Pilih hari untuk melihat agenda</span></div><div class="daytabs">${days.map(d=>`<button class="daytab ${d===selectedDay?'active':''}" data-action="select-day" data-day="${d}">${d}</button>`).join('')}</div><div id="dayEvents">${sortedSchedule(selectedDay).length?sortedSchedule(selectedDay).map(eventHTML).join(''):empty(selectedDay==='Jumat'?'Jumat kosong — tidak ada jadwal matkul.':'Belum ada agenda untuk hari ini.')}</div></section>
-<section class="card span12"><div class="sectiontitle">Jadwal custom tersimpan <span class="chip">${state.customSchedules.length} AGENDA</span></div>${state.customSchedules.length?`<div class="list">${state.customSchedules.map(c=>`<div class="listitem"><span class="dot"></span><div class="listmain"><div class="listtitle">${esc(c.name)}</div><div class="listmeta">${c.day} · ${c.start}–${c.end}${c.note?' · '+esc(c.note):''}</div></div><button class="btn secondary small" data-action="edit-schedule" data-id="${c.id}">Edit</button><button class="btn secondary small" data-action="delete-schedule" data-id="${c.id}">×</button></div>`).join('')}</div>`:empty('Belum ada jadwal custom. Tambahkan deadline, rapat kelompok, atau kegiatan kampus.')}</section></div>`}
-function taskPage(){return `${titleBlock('DAFTAR PEKERJAAN','Tugas & proyek','Simpan detail tugas, tenggat, mata kuliah, dan lampiran.',`<button class="btn" data-action="new-task">＋ Tambah tugas</button>`)}
-<div class="toolbar"><div class="search"><input id="taskSearch" placeholder="Cari tugas atau mata kuliah…" value="${esc(window.taskQuery||'')}"></div><select id="taskFilter" class="attachment"><option value="all">Semua status</option><option value="active">Belum selesai</option><option value="done">Selesai</option></select></div>
-<div class="grid" id="taskList">${renderTasks()}</div>`}
-function renderTasks(){let q=(window.taskQuery||'').toLowerCase(),f=window.taskFilter||'all';let list=state.tasks.filter(t=>(t.title+' '+t.course+' '+(t.body||'')).toLowerCase().includes(q)&&(f==='all'||(f==='done'?t.done:!t.done)));return list.length?list.map(t=>`<section class="card span6 ${t.done?'completed':''}"><div class="itemtop"><div class="itemtitle">${esc(t.title)}</div><span class="chip">${t.done?'SELESAI':'AKTIF'}</span></div><div class="listmeta">${esc(t.course||'Umum')}${t.due?' · Tenggat '+esc(t.due):''}</div>${t.body?`<div class="itembody">${esc(t.body)}</div>`:''}${attachmentHTML(t.attachments)}<div class="itemactions"><button class="btn small" data-action="toggle-task" data-id="${t.id}">${t.done?'↶ Belum selesai':'✓ Tandai selesai'}</button><button class="btn secondary small" data-action="edit-task" data-id="${t.id}">Edit</button><button class="btn secondary small" data-action="delete-task" data-id="${t.id}">Hapus</button></div></section>`).join(''): `<div class="span12">${empty(q?'Tidak ada tugas yang cocok dengan pencarian.':'Belum ada tugas. Tekan “Tambah tugas” untuk mulai menyimpan pekerjaan kuliah.')}</div>`}
-function attachmentHTML(arr=[]){if(!arr.length)return '';return `<div class="attachments">${arr.map((a,i)=>a.type&&a.type.startsWith('image/')?`<a class="attachment" href="${a.data}" target="_blank" rel="noopener"><img src="${a.data}" alt="${esc(a.name)}">${esc(a.name)}</a>`:`<a class="attachment" href="${a.data}" download="${esc(a.name)}">↧ ${esc(a.name)}</a>`).join('')}</div>`}
-function journalPage(){return `${titleBlock('CATATAN PERKULIAHAN','Jurnal pembelajaran','Dokumentasikan materi, file kuliah, foto catatan, serta referensi dan buku.',`<button class="btn" data-action="new-journal">＋ Tambah jurnal</button>`)}
-<div class="grid"><section class="card span12"><div class="sectiontitle">Jurnal pembelajaran <span class="chip">${state.journals.length} CATATAN</span></div>${state.journals.length?`<div class="grid">${state.journals.map(x=>recordCard(x,'journal')).join('')}</div>`:empty('Belum ada jurnal. Kamu bisa menulis ringkasan materi dan mengunggah gambar atau file.')}</section>
-<section class="card span6"><div class="sectiontitle">Referensi <button class="btn secondary small" data-action="new-reference">＋ Tambah</button></div>${state.references.length?`<div class="list">${state.references.map(x=>simpleTextCard(x,'reference')).join('')}</div>`:empty('Simpan tautan atau catatan referensi lewat teks.')}</section>
-<section class="card span6"><div class="sectiontitle">Buku pembelajaran <button class="btn secondary small" data-action="new-book">＋ Tambah</button></div>${state.books.length?`<div class="list">${state.books.map(x=>simpleTextCard(x,'book')).join('')}</div>`:empty('Catat judul buku, penulis, halaman, dan poin penting.')}</section></div>`}
-function ideasPage(){return `${titleBlock('TEMPAT INSPIRASI','Bank ide','Jangan biarkan ide bagus hilang — simpan tulisan, gambar, sketsa, dan file.',`<button class="btn" data-action="new-idea">＋ Simpan ide</button>`)}
-<div class="grid">${state.ideas.length?state.ideas.map(x=>recordCard(x,'idea')).join(''):`<div class="span12">${empty('Belum ada ide tersimpan. Tambahkan inspirasi visual, konsep desain, gambar, atau file referensi.')}</div>`}</div>`}
-function recordCard(x,type){return `<section class="card ${type==='journal'?'span6':'span6'}"><div class="itemtop"><div class="itemtitle">${esc(x.title)}</div><span class="chip">${type==='journal'?'JURNAL':'IDE'}</span></div><div class="listmeta">${esc(x.course||'Umum')} · ${esc(x.date||'')}</div>${x.body?`<div class="itembody">${esc(x.body)}</div>`:''}${attachmentHTML(x.attachments)}<div class="itemactions"><button class="btn secondary small" data-action="edit-${type}" data-id="${x.id}">Edit</button><button class="btn secondary small" data-action="delete-${type}" data-id="${x.id}">Hapus</button></div></section>`}
-function simpleTextCard(x,type){return `<div class="listitem"><span class="dot"></span><div class="listmain"><div class="listtitle">${esc(x.title)}</div><div class="listmeta">${esc(x.body||'')}</div></div><button class="btn secondary small" data-action="edit-${type}" data-id="${x.id}">Edit</button><button class="btn secondary small" data-action="delete-${type}" data-id="${x.id}">×</button></div>`}
-function settingsPage(){return `${titleBlock('PREFERENSI','Pengaturan','Atur profil, tampilan, dan data lokal aplikasi.')}
-<div class="grid"><section class="card span7"><div class="sectiontitle">Profil</div>${profileCard()}<div style="margin-top:15px"><button class="btn" data-action="edit-profile">✎ Edit profil</button></div></section>
-<section class="card span5"><div class="sectiontitle">Tampilan</div><div class="switchrow"><div><b>Tema gelap</b><div class="note">Lebih nyaman untuk malam hari.</div></div><input type="checkbox" class="switch" id="themeSwitch" ${state.theme==='dark'?'checked':''}></div><div class="note">Tema cerah dan gelap berlaku untuk semua channel.</div></section>
-<section class="card span12"><div class="sectiontitle">Data perangkat</div><p class="sub">Semua data Ruang DKV disimpan di browser/perangkat ini. Tidak ada akun atau sinkronisasi cloud. Ekspor cadangan secara berkala agar data tidak hilang saat data aplikasi dibersihkan.</p><div class="btnrow" style="margin-top:15px"><button class="btn" data-action="export-data">⇩ Ekspor cadangan</button><button class="btn secondary" data-action="import-data">⇧ Impor cadangan</button><button class="btn danger" data-action="clear-data">Hapus semua data</button></div><input type="file" id="importFile" accept="application/json,.json" class="hidden"></section>
-<section class="card span12"><div class="sectiontitle">Tentang Ruang DKV</div><p class="sub">Versi 1.0 · Web app pribadi untuk perkuliahan DKV. Bisa dibungkus menjadi APK WebView/PWA. Foto dan file lampiran disimpan sebagai data lokal di browser; hindari lampiran berukuran sangat besar.</p></section></div>`}
-function render(){applyTheme();$('#todayLabel').textContent=fmtDate();const views={home:homePage,schedule:schedulePage,tasks:taskPage,journal:journalPage,ideas:ideasPage,settings:settingsPage};$('#main').innerHTML=(views[currentPage]||homePage)();$$('.navbtn[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===currentPage));if(currentPage==='tasks'){if($('#taskFilter'))$('#taskFilter').value=window.taskFilter||'all';}}
-function courseOptions(value=''){return `<option value="">Pilih mata kuliah</option>${[...new Set(courses.map(c=>c.name))].map(c=>`<option ${c===value?'selected':''}>${esc(c)}</option>`).join('')}<option value="Umum" ${value==='Umum'?'selected':''}>Umum / lainnya</option>`}
-function fileField(existing=[]){return `<div class="field full"><label>Lampiran file / gambar</label><input type="file" id="recordFiles" multiple accept="image/*,.pdf,.ppt,.pptx,.doc,.docx,.txt,.zip,.psd,.ai"><div class="note">Bisa pilih beberapa file sekaligus. Gambar, PDF, PPT, dan file lain didukung. Disarankan file tidak terlalu besar.</div>${existing.length?`<div class="attachments" id="existingFiles">${existing.map((a,i)=>`<span class="attachment">${esc(a.name)} <button type="button" class="iconbtn" style="width:22px;height:22px;font-size:15px" data-action="remove-attachment" data-index="${i}">×</button></span>`).join('')}</div>`:''}</div>`}
-function recordForm(type,id=''){let bucket=type==='journal'?'journals':'ideas',old=id?state[bucket].find(x=>x.id===id):null;editRecordId=id||null;let title=type==='journal'?'Jurnal pembelajaran':'Ide';modal(`<div class="modalhead"><h2>${old?'Edit':'Tambah'} ${title.toLowerCase()}</h2><button class="iconbtn" data-action="close-modal">×</button></div>
-<form id="recordForm" data-type="${type}" data-id="${id}"><div class="field"><label>Judul *</label><input name="title" required maxlength="140" placeholder="${type==='journal'?'Contoh: Catatan tipografi pertemuan 3':'Contoh: Konsep poster kampanye'}" value="${esc(old?.title||'')}"></div><div class="field"><label>Mata kuliah (opsional)</label><select name="course">${courseOptions(old?.course||'')}</select></div><div class="field"><label>Catatan / isi</label><textarea name="body" placeholder="Tulis materi, penjelasan, atau detail idemu…">${esc(old?.body||'')}</textarea></div>${fileField(old?.attachments||[])}<div class="btnrow"><button class="btn" type="submit">Simpan ${type==='journal'?'jurnal':'ide'}</button><button class="btn secondary" type="button" data-action="close-modal">Batal</button></div></form>`);if(old)$('#recordFiles').dataset.keep=JSON.stringify(old.attachments||[])}
-function taskForm(id=''){let old=id?state.tasks.find(x=>x.id===id):null;editRecordId=id||null;modal(`<div class="modalhead"><h2>${old?'Edit tugas':'Tambah tugas / proyek'}</h2><button class="iconbtn" data-action="close-modal">×</button></div><form id="taskForm" data-id="${id}"><div class="field"><label>Nama tugas *</label><input name="title" required maxlength="140" placeholder="Contoh: Poster kampanye sosial" value="${esc(old?.title||'')}"></div><div class="formgrid"><div class="field"><label>Mata kuliah *</label><select name="course" required>${courseOptions(old?.course||'')}</select></div><div class="field"><label>Tenggat (opsional)</label><input type="date" name="due" value="${esc(old?.due||'')}"></div></div><div class="field"><label>Deskripsi / catatan</label><textarea name="body" placeholder="Brief, ukuran, format pengumpulan, pembagian tugas…">${esc(old?.body||'')}</textarea></div>${fileField(old?.attachments||[])}<div class="btnrow"><button class="btn" type="submit">Simpan tugas</button><button class="btn secondary" type="button" data-action="close-modal">Batal</button></div></form>`);if(old)$('#recordFiles').dataset.keep=JSON.stringify(old.attachments||[])}
-function scheduleForm(id=''){let old=id?state.customSchedules.find(x=>x.id===id):null;modal(`<div class="modalhead"><h2>${old?'Edit':'Tambah'} jadwal custom</h2><button class="iconbtn" data-action="close-modal">×</button></div><form id="scheduleForm" data-id="${id}"><div class="field"><label>Nama kegiatan *</label><input name="name" required maxlength="120" placeholder="Contoh: Diskusi kelompok" value="${esc(old?.name||'')}"></div><div class="field"><label>Hari *</label><select name="day" required>${days.map(d=>`<option ${d===(old?.day||selectedDay)?'selected':''}>${d}</option>`).join('')}</select></div><div class="formgrid"><div class="field"><label>Jam mulai *</label><input name="start" type="time" required value="${esc(old?.start||'09:00')}"></div><div class="field"><label>Jam selesai *</label><input name="end" type="time" required value="${esc(old?.end||'10:00')}"></div></div><div class="field"><label>Catatan (opsional)</label><input name="note" maxlength="180" placeholder="Lokasi, deadline, pengingat…" value="${esc(old?.note||'')}"></div><div class="btnrow"><button class="btn" type="submit">Simpan jadwal</button><button class="btn secondary" type="button" data-action="close-modal">Batal</button></div></form>`)}
-function textForm(type,id=''){let bucket=type==='reference'?'references':'books',old=id?state[bucket].find(x=>x.id===id):null;let isRef=type==='reference';modal(`<div class="modalhead"><h2>${old?'Edit':'Tambah'} ${isRef?'referensi':'buku pembelajaran'}</h2><button class="iconbtn" data-action="close-modal">×</button></div><form id="textForm" data-type="${type}" data-id="${id}"><div class="field"><label>${isRef?'Judul referensi':'Judul buku'} *</label><input name="title" required maxlength="140" value="${esc(old?.title||'')}" placeholder="${isRef?'Nama artikel / tautan / sumber':'Judul buku' }"></div><div class="field"><label>${isRef?'Tautan atau catatan referensi':'Penulis, bab, halaman, atau ringkasan'}</label><textarea name="body" placeholder="${isRef?'Tempel tautan dan tulis kenapa referensi ini berguna…':'Catat penulis, halaman, poin penting, dan kutipan…'}">${esc(old?.body||'')}</textarea></div><div class="btnrow"><button class="btn" type="submit">Simpan</button><button class="btn secondary" type="button" data-action="close-modal">Batal</button></div></form>`)}
-function profileForm(){let p=state.profile;modal(`<div class="modalhead"><h2>Edit profil</h2><button class="iconbtn" data-action="close-modal">×</button></div><form id="profileForm"><div class="field"><label>Nama tampilan</label><input name="name" maxlength="50" value="${esc(p.name)}" placeholder="Anonim"></div><div class="field"><label>Bio singkat</label><input name="bio" maxlength="100" value="${esc(p.bio)}" placeholder="Mahasiswa DKV"></div><div class="formgrid"><div class="field"><label>Foto profil dari galeri</label><input type="file" id="avatarPick" accept="image/*"><button class="btn secondary small" type="button" data-action="crop-avatar">✂ Crop foto profil</button></div><div class="field"><label>Banner dari galeri</label><input type="file" id="bannerPick" accept="image/*"><button class="btn secondary small" type="button" data-action="crop-banner">✂ Crop banner</button></div></div><div class="note">Pilih foto dulu, lalu tekan tombol crop untuk mengatur posisi dan zoom seperti editor profil.</div><div class="btnrow" style="margin-top:16px"><button class="btn" type="submit">Simpan profil</button><button class="btn secondary" type="button" data-action="close-modal">Batal</button></div></form>`)}
-function openCrop(target){let input=target==='avatar'?$('#avatarPick'):$('#bannerPick');if(!input?.files?.[0]){toast('Pilih gambar dari galeri dulu.');return}let f=input.files[0];if(!f.type.startsWith('image/')){toast('Pilih file gambar.');return}let reader=new FileReader();reader.onload=()=>{cropTarget=target;cropImage=new Image();cropImage.onload=()=>{cropScale=1;cropX=0;cropY=0;showCropModal()};cropImage.src=reader.result};reader.readAsDataURL(f)}
-function showCropModal(){modal(`<div class="modalhead"><h2>Atur ${cropTarget==='avatar'?'foto profil':'banner'}</h2><button class="iconbtn" data-action="close-modal">×</button></div><div class="cropbox" id="cropbox"><img id="cropPreview" src="${cropImage.src}" alt="Pratinjau crop"><div class="cropguide"></div></div><div class="field" style="margin-top:15px"><label>Zoom</label><input id="cropZoom" type="range" min="1" max="3" step=".01" value="1"></div><div class="note">Geser gambar untuk mengatur posisi. Bagian di dalam bingkai yang akan disimpan.</div><div class="btnrow" style="margin-top:15px"><button class="btn" data-action="apply-crop">Gunakan gambar</button><button class="btn secondary" data-action="close-modal">Batal</button></div>`);let box=$('#cropbox');box.style.height=cropTarget==='avatar'?'240px':'190px';let img=$('#cropPreview');img.onload=fitCrop;fitCrop();$('#cropZoom').addEventListener('input',e=>{cropScale=+e.target.value;fitCrop()});box.addEventListener('pointerdown',e=>{cropDragging=true;cropStart={x:e.clientX,y:e.clientY,ox:cropX,oy:cropY};box.setPointerCapture(e.pointerId)});box.addEventListener('pointermove',e=>{if(!cropDragging)return;cropX=cropStart.ox+e.clientX-cropStart.x;cropY=cropStart.oy+e.clientY-cropStart.y;fitCrop()});box.addEventListener('pointerup',()=>cropDragging=false);box.addEventListener('pointercancel',()=>cropDragging=false)}
-function fitCrop(){let box=$('#cropbox'),img=$('#cropPreview');if(!box||!img||!cropImage)return;let w=box.clientWidth,h=box.clientHeight,base=Math.max(w/cropImage.width,h/cropImage.height),iw=cropImage.width*base*cropScale,ih=cropImage.height*base*cropScale;img.style.width=iw+'px';img.style.height=ih+'px';img.style.left=((w-iw)/2+cropX)+'px';img.style.top=((h-ih)/2+cropY)+'px'}
-function applyCrop(){let box=$('#cropbox');if(!box||!cropImage)return;let w=box.clientWidth,h=box.clientHeight,base=Math.max(w/cropImage.width,h/cropImage.height),iw=cropImage.width*base*cropScale,ih=cropImage.height*base*cropScale,left=(w-iw)/2+cropX,top=(h-ih)/2+cropY;let scale=cropImage.width/iw;let sx=Math.max(0,-left*scale),sy=Math.max(0,-top*scale),sw=Math.min(cropImage.width,w*scale),sh=Math.min(cropImage.height,h*scale);let canvas=document.createElement('canvas');canvas.width=cropTarget==='avatar'?600:1200;canvas.height=cropTarget==='avatar'?600:Math.round(1200*h/w);let ctx=canvas.getContext('2d');ctx.drawImage(cropImage,sx,sy,sw,sh,0,0,canvas.width,canvas.height);let data=canvas.toDataURL('image/jpeg',.88);if(cropTarget==='avatar')state.profile.avatar=data;else state.profile.banner=data;saveState();closeModal();profileForm();toast('Crop diterapkan. Tekan Simpan profil untuk menyimpan perubahan.')}
-async function readFiles(input){let files=[...(input?.files||[])];let out=[];for(let f of files){if(f.size>8*1024*1024){toast(`${f.name} lebih dari 8 MB, dilewati.`);continue}try{let data=await new Promise((res,rej)=>{let r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(f)});out.push({name:f.name,type:f.type||'application/octet-stream',size:f.size,data})}catch(e){}}return out}
-async function getAttachments(){let input=$('#recordFiles'),keep=[];try{keep=JSON.parse(input?.dataset.keep||'[]')}catch(e){}let newFiles=await readFiles(input);return [...keep,...newFiles]}
-function removeAttachment(index){let input=$('#recordFiles');if(!input)return;let arr=[];try{arr=JSON.parse(input.dataset.keep||'[]')}catch(e){}arr.splice(index,1);input.dataset.keep=JSON.stringify(arr);let existing=$('#existingFiles');if(existing)existing.innerHTML=arr.map((a,i)=>`<span class="attachment">${esc(a.name)} <button type="button" class="iconbtn" style="width:22px;height:22px;font-size:15px" data-action="remove-attachment" data-index="${i}">×</button></span>`).join('')}
-function exportData(){let blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='cadangan-ruang-dkv-'+new Date().toISOString().slice(0,10)+'.json';a.click();URL.revokeObjectURL(url);toast('Cadangan mulai diunduh.')}
-function clearData(){modal(`<div class="modalhead"><h2>Hapus semua data?</h2><button class="iconbtn" data-action="close-modal">×</button></div><p>Semua profil, tugas, jadwal custom, jurnal, ide, dan lampiran lokal akan dihapus. Tindakan ini tidak bisa dibatalkan. Ekspor cadangan dulu jika perlu.</p><div class="btnrow"><button class="btn danger" data-action="confirm-clear">Ya, hapus semua</button><button class="btn secondary" data-action="close-modal">Batal</button></div>`)}
-function confirmClear(){state=structuredClone(defaultState);saveState();closeModal();navigate('home');toast('Data lokal sudah dihapus.')}
-function deleteRecord(bucket,id){if(!confirm('Hapus item ini?'))return;state[bucket]=state[bucket].filter(x=>x.id!==id);saveState();render();toast('Item dihapus.')}
-function importData(){let inp=$('#importFile');if(inp)inp.click()}
-$('#menuBtn').addEventListener('click',openMenu);$('#closeMenu').addEventListener('click',closeMenu);$('#overlay').addEventListener('click',closeMenu);$('#themeQuick').addEventListener('click',()=>{state.theme=state.theme==='dark'?'light':'dark';saveState();render()});
-$$('.navbtn[data-page]').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.page)));
-$('#modalback').addEventListener('click',e=>{if(e.target===$('#modalback'))closeModal()});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeMenu();closeModal()}});
-document.addEventListener('input',e=>{if(e.target.id==='taskSearch'){window.taskQuery=e.target.value;let list=$('#taskList');if(list)list.innerHTML=renderTasks()}});
-document.addEventListener('change',e=>{if(e.target.id==='taskFilter'){window.taskFilter=e.target.value;let list=$('#taskList');if(list)list.innerHTML=renderTasks()}if(e.target.id==='themeSwitch'){state.theme=e.target.checked?'dark':'light';saveState();render()}if(e.target.id==='importFile'&&e.target.files[0]){let r=new FileReader();r.onload=()=>{try{let incoming=JSON.parse(r.result);if(!incoming.profile||!Array.isArray(incoming.tasks))throw Error();state={...structuredClone(defaultState),...incoming,profile:{...defaultState.profile,...incoming.profile}};saveState();render();toast('Cadangan berhasil diimpor.')}catch(err){toast('File cadangan tidak valid.')}};r.readAsText(e.target.files[0]);e.target.value=''}});
-document.addEventListener('submit',async e=>{let f=e.target;if(!['taskForm','recordForm','scheduleForm','textForm','profileForm'].includes(f.id))return;e.preventDefault();let fd=new FormData(f),id=f.dataset.id||'',now=new Date().toLocaleDateString('id-ID');if(f.id==='profileForm'){state.profile.name=(fd.get('name')||'').trim()||'Anonim';state.profile.bio=(fd.get('bio')||'').trim();saveState();closeModal();render();toast('Profil disimpan.');return}
-if(f.id==='taskForm'){let attachments=await getAttachments(),old=state.tasks.find(x=>x.id===id);let obj={id:id||uid(),title:fd.get('title').trim(),course:fd.get('course'),due:fd.get('due'),body:fd.get('body').trim(),attachments,done:old?.done||false};if(old)state.tasks=state.tasks.map(x=>x.id===id?obj:x);else state.tasks.unshift(obj);saveState();closeModal();render();toast('Tugas disimpan.');return}
-if(f.id==='recordForm'){let type=f.dataset.type,bucket=type==='journal'?'journals':'ideas',attachments=await getAttachments(),old=state[bucket].find(x=>x.id===id),obj={id:id||uid(),title:fd.get('title').trim(),course:fd.get('course'),body:fd.get('body').trim(),attachments,date:old?.date||now};if(old)state[bucket]=state[bucket].map(x=>x.id===id?obj:x);else state[bucket].unshift(obj);saveState();closeModal();render();toast('Catatan disimpan.');return}
-if(f.id==='scheduleForm'){let obj={id:id||uid(),name:fd.get('name').trim(),day:fd.get('day'),start:fd.get('start'),end:fd.get('end'),note:fd.get('note').trim()};if(obj.end<=obj.start){toast('Jam selesai harus setelah jam mulai.');return}if(id)state.customSchedules=state.customSchedules.map(x=>x.id===id?obj:x);else state.customSchedules.push(obj);selectedDay=obj.day;saveState();closeModal();render();toast('Jadwal custom disimpan.');return}
-if(f.id==='textForm'){let type=f.dataset.type,bucket=type==='reference'?'references':'books',old=state[bucket].find(x=>x.id===id),obj={id:id||uid(),title:fd.get('title').trim(),body:fd.get('body').trim()};if(old)state[bucket]=state[bucket].map(x=>x.id===id?obj:x);else state[bucket].unshift(obj);saveState();closeModal();render();toast('Catatan disimpan.');return}
-});
-document.addEventListener('click',e=>{let b=e.target.closest('[data-action]');if(!b)return;let a=b.dataset.action,id=b.dataset.id;
-switch(a){
-case 'close-modal':closeModal();break;case 'edit-profile':profileForm();break;case 'new-task':taskForm();break;case 'edit-task':taskForm(id);break;case 'toggle-task':{let t=state.tasks.find(x=>x.id===id);if(t)t.done=!t.done;saveState();render();break}case 'delete-task':deleteRecord('tasks',id);break;
-case 'new-journal':recordForm('journal');break;case 'edit-journal':recordForm('journal',id);break;case 'delete-journal':deleteRecord('journals',id);break;case 'new-idea':recordForm('idea');break;case 'edit-idea':recordForm('idea',id);break;case 'delete-idea':deleteRecord('ideas',id);break;
-case 'new-reference':textForm('reference');break;case 'edit-reference':textForm('reference',id);break;case 'delete-reference':deleteRecord('references',id);break;case 'new-book':textForm('book');break;case 'edit-book':textForm('book',id);break;case 'delete-book':deleteRecord('books',id);break;
-case 'new-schedule':scheduleForm();break;case 'edit-schedule':scheduleForm(id);break;case 'delete-schedule':deleteRecord('customSchedules',id);break;case 'select-day':selectedDay=b.dataset.day;render();break;
-case 'goto-schedule':navigate('schedule');break;case 'goto-tasks':navigate('tasks');break;case 'goto-journal':navigate('journal');break;case 'new-journal':recordForm('journal');break;
-case 'crop-avatar':openCrop('avatar');break;case 'crop-banner':openCrop('banner');break;case 'apply-crop':applyCrop();break;
-case 'remove-attachment':removeAttachment(+b.dataset.index);break;case 'export-data':exportData();break;case 'import-data':importData();break;case 'clear-data':clearData();break;case 'confirm-clear':confirmClear();break;
+const DEFAULT_JURNAL = [
+{ id: '1', title: 'Proses Sketsa Storyboard', desc: 'Mencoba membuat beberapa alternatif angle untuk scene utama.', img: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=500&q=80', tags: ['Storyboard', 'Sketsa'], semester: 3, date: '12 Okt 2026' },
+{ id: '2', title: 'Eksperimen Fotografi', desc: 'Mencoba teknik low light photography.', img: 'https://images.unsplash.com/photo-1554048612-b6a482bc67e5?auto=format&fit=crop&w=500&q=80', tags: ['Fotografi', 'Referensi'], semester: 3, date: '10 Okt 2026' }
+];
+const DEFAULT_IDE = [
+{ id: '1', title: 'Konsep Visual Cyberpunk', desc: 'Referensi warna neon untuk proyek animasi.', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=500&q=80', tags: ['Cyberpunk', 'Moodboard'], semester: 3 },
+{ id: '2', title: 'Referensi Warna & Style', desc: 'Kombinasi warna pastel untuk UI/UX.', img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=500&q=80', tags: ['ColorPalette'], semester: 3 }
+];
+
+// INITIAL STATE & LOCAL STORAGE
+let profile = JSON.parse(localStorage.getItem('dkv_profile')) || DEFAULT_PROFILE;
+let schedule = JSON.parse(localStorage.getItem('dkv_schedule')) || DEFAULT_SCHEDULE;
+let tasks = JSON.parse(localStorage.getItem('dkv_tasks')) || DEFAULT_TASKS;
+let jurnal = JSON.parse(localStorage.getItem('dkv_jurnal')) || DEFAULT_JURNAL;
+let ide = JSON.parse(localStorage.getItem('dkv_ide')) || DEFAULT_IDE;
+let tempTaskFile = null;
+let tempMediaImage = null;
+// INIT APP
+window.onload = function() {
+lucide.createIcons();
+renderProfileUI();
+renderDashboard();
+renderScheduleUI();
+renderTasksUI('all');
+renderJurnalUI();
+renderIdeUI();
+initSettingsForm();
+};
+function saveData() {
+localStorage.setItem('dkv_profile', JSON.stringify(profile));
+localStorage.setItem('dkv_schedule', JSON.stringify(schedule));
+localStorage.setItem('dkv_tasks', JSON.stringify(tasks));
+localStorage.setItem('dkv_jurnal', JSON.stringify(jurnal));
+localStorage.setItem('dkv_ide', JSON.stringify(ide));
 }
+// NAVIGATION
+function switchPage(pageId) {
+document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+document.getElementById(page-${pageId}).classList.add('active');
+const navTarget = Array.from(document.querySelectorAll('.nav-item'))
+.find(el => el.getAttribute('onclick')?.includes(pageId));
+if(navTarget) navTarget.classList.add('active');
+if(pageId === 'beranda') renderDashboard();
+if(pageId === 'jadwal') renderScheduleUI();
+if(pageId === 'pengaturan') renderScheduleEditorList();
+}
+function toggleTheme() {
+const isDark = document.getElementById('themeToggle').checked;
+document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+}
+// PROFILE & DASHBOARD RENDER
+function renderProfileUI() {
+document.getElementById('displayName').innerText = profile.name;
+document.getElementById('displayStatus').innerText = profile.status;
+document.getElementById('displayBio').innerText = "${profile.bio}";
+document.getElementById('displaySemesterTag').innerText = Semester ${profile.semester};
+document.getElementById('displayAvatar').style.backgroundImage = url('${profile.avatar}');
+document.getElementById('displayBanner').style.backgroundImage = url('${profile.banner}');
+}
+  function renderDashboard() {
+// Stats
+document.getElementById('statTugasCount').innerText = tasks.length;
+document.getElementById('statJurnalCount').innerText = jurnal.length;
+document.getElementById('statIdeCount').innerText = ide.length;
+document.getElementById('statRefCount').innerText = jurnal.length + ide.length;
+// Recent Tasks (Max 3)
+const dashTaskList = document.getElementById('dashTaskList');
+dashTaskList.innerHTML = tasks.slice(0, 3).map(t => <div class="task-item"> <div class="task-left"> <div class="task-icon" style="background:${t.done ? '#10b981' : '#ec4899'};"> <i data-lucide="${t.done ? 'check' : 'clock'}" style="width:18px;"></i> </div> <div> <div class="task-title">${t.title} <span class="semester-tag">Sem ${t.semester}</span></div> <div class="task-meta">${t.deadline} • Tag: ${t.tag}</div> </div> </div> <span class="badge ${t.done ? 'badge-done' : 'badge-pending'}">${t.done ? 'Selesai' : 'Belum'}</span> </div>).join('');
+// Today's Schedule
+const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+const todayName = days[new Date().getDay()];
+const todaySched = schedule[todayName] || [];
+const dashSchedList = document.getElementById('dashScheduleList');
+if (todaySched.length === 0) {
+dashSchedList.innerHTML = <div style="color:var(--text-sub); font-size:0.85rem;">Tidak ada jadwal kuliah hari ini (${todayName}). Libur! 🎉</div>;
+} else {
+dashSchedList.innerHTML = todaySched.map(s => <div class="schedule-card"> <i data-lucide="book-open" style="color:var(--accent-light);"></i> <div> <div style="font-weight:600; font-size:0.85rem;">${s.name}</div> <div style="font-size:0.75rem; color:var(--text-sub);">${s.time}</div> </div> </div>).join('');
+}
+lucide.createIcons();
+}
+// SCHEDULE RENDER
+function renderScheduleUI() {
+const container = document.getElementById('scheduleContainer');
+container.innerHTML = Object.keys(schedule).map(day => <div class="schedule-day-group"> <div class="schedule-day-title"><i data-lucide="calendar"></i> ${day}</div> <div class="schedule-grid"> ${schedule[day].length === 0 ? '<div style="color:var(--text-sub); font-size:0.8rem;">Kosong / Tidak ada matkul</div>' :  schedule[day].map(item =>
+<div class="schedule-card">
+<div style="background:rgba(124,58,237,0.2); width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--accent-light);">
+<i data-lucide="book" style="width:16px;"></i>
+</div>
+<div>
+<div style="font-weight:600; font-size:0.85rem;">{item.name}</div>
+<div style="font-size:0.75rem; color:var(--text-sub);">{item.time}</div>
+</div>
+</div>
+).join('') } </div> </div> ).join('');
+lucide.createIcons();
+  }
+  // TASKS RENDER & MODAL
+function renderTasksUI(filter = 'all') {
+const fullList = document.getElementById('fullTaskList');
+let filtered = tasks;
+if (filter === 'pending') filtered = tasks.filter(t => !t.done);
+if (filter === 'done') filtered = tasks.filter(t => t.done);
+fullList.innerHTML = filtered.map(t => <div class="task-item"> <div class="task-left"> <div class="task-icon" style="background:${t.done ? '#10b981' : '#7c3aed'}; cursor:pointer;" onclick="toggleTaskDone('${t.id}')"> <i data-lucide="${t.done ? 'check-square' : 'square'}" style="width:18px;"></i> </div> <div> <div class="task-title">${t.title} <span class="semester-tag">Semester ${t.semester}</span></div> <div class="task-meta">${t.deadline} • Kategori: ${t.tag}</div> ${t.file ?<a href="${t.file.data}" download="${t.file.name}" class="file-attachment-badge"><i data-lucide="paperclip" style="width:12px;"></i> ${t.file.name}</a>: ''} </div> </div> <div style="display:flex; align-items:center; gap:10px;"> <span class="badge ${t.done ? 'badge-done' : 'badge-pending'}">${t.done ? 'Selesai' : 'Belum'}</span> <i data-lucide="trash-2" style="width:16px; color:#ef4444; cursor:pointer;" onclick="deleteTask('${t.id}')"></i> </div> </div>).join('');
+lucide.createIcons();
+}
+function filterTasks(type, btn) {
+document.querySelectorAll('#page-tugas .tab-btn').forEach(b => b.classList.remove('active'));
+btn.classList.add('active');
+renderTasksUI(type);
+}
+function toggleTaskDone(id) {
+tasks = tasks.map(t => t.id === id ? { ...t, done: !t.done } : t);
+saveData();
+renderTasksUI();
+}
+function deleteTask(id) {
+tasks = tasks.filter(t => t.id !== id);
+saveData();
+renderTasksUI();
+}
+function openTaskModal() {
+document.getElementById('taskId').value = '';
+document.getElementById('taskInputTitle').value = '';
+document.getElementById('taskInputTag').value = '';
+document.getElementById('taskInputDeadline').value = '';
+document.getElementById('taskFileStatus').innerHTML = '';
+tempTaskFile = null;
+document.getElementById('taskModal').classList.add('active');
+  }
+  function closeTaskModal() {
+document.getElementById('taskModal').classList.remove('active');
+}
+function handleTaskFileUpload(input) {
+const file = input.files[0];
+if (file) {
+const reader = new FileReader();
+reader.onload = function(e) {
+tempTaskFile = { name: file.name, data: e.target.result };
+document.getElementById('taskFileStatus').innerHTML = <span style="font-size:0.75rem; color:var(--badge-success);">✓ File terpilih: ${file.name}</span>;
+};
+reader.readAsDataURL(file);
+}
+}
+function saveTask() {
+const title = document.getElementById('taskInputTitle').value.trim();
+const tag = document.getElementById('taskInputTag').value.trim() || 'DKV';
+const deadline = document.getElementById('taskInputDeadline').value.trim() || 'Batas: Segera';
+if (!title) return alert('Judul tugas harus diisi!');
+const newTask = {
+id: Date.now().toString(),
+title: title,
+tag: tag,
+deadline: deadline,
+done: false,
+semester: profile.semester,
+file: tempTaskFile
+};
+tasks.unshift(newTask);
+saveData();
+renderTasksUI();
+closeTaskModal();
+}
+// JURNAL & IDE RENDER
+function renderJurnalUI() {
+const grid = document.getElementById('jurnalGrid');
+grid.innerHTML = jurnal.map(j => <div class="content-card"> <img src="${j.img}" class="content-card-img" alt="Jurnal"> <div class="content-card-body"> <div> <div class="content-card-title">${j.title}</div> <div class="content-card-desc">${j.desc}</div> </div> <div> <div class="tags-container" style="margin-bottom:8px;"> <span class="tag">Semester ${j.semester}</span> ${j.tags.map(t =><span class="tag">${t}</span>).join('')} </div> <div style="font-size:0.7rem; color:var(--text-sub); display:flex; justify-content:space-between;"> <span>${j.date || 'Tersimpan'}</span> <i data-lucide="trash-2" style="width:14px; color:#ef4444; cursor:pointer;" onclick="deleteJurnal('${j.id}')"></i> </div> </div> </div> </div> ).join('');
+lucide.createIcons();
+                                                                                                                                                                                                                                                                                                                                                                                   }
+  function renderIdeUI() {
+const grid = document.getElementById('ideGrid');
+grid.innerHTML = ide.map(i => <div class="content-card"> <img src="${i.img}" class="content-card-img" alt="Ide"> <div class="content-card-body"> <div> <div class="content-card-title">${i.title}</div> <div class="content-card-desc">${i.desc}</div> </div> <div> <div class="tags-container" style="margin-bottom:8px;"> <span class="tag">Semester ${i.semester}</span> ${i.tags.map(t =><span class="tag">${t}</span>).join('')} </div> <div style="font-size:0.7rem; color:var(--text-sub); text-align:right;"> <i data-lucide="trash-2" style="width:14px; color:#ef4444; cursor:pointer;" onclick="deleteIde('${i.id}')"></i> </div> </div> </div> </div> ).join('');
+lucide.createIcons();
+}
+function openMediaModal(type) {
+document.getElementById('mediaType').value = type;
+document.getElementById('mediaModalTitle').innerText = Tambah ${type} Baru;
+document.getElementById('mediaInputTitle').value = '';
+document.getElementById('mediaInputDesc').value = '';
+document.getElementById('mediaInputTags').value = '';
+tempMediaImage = null;
+document.getElementById('mediaModal').classList.add('active');
+}
+function closeMediaModal() {
+document.getElementById('mediaModal').classList.remove('active');
+}
+function handleMediaImageUpload(input) {
+const file = input.files[0];
+if(file) {
+const reader = new FileReader();
+reader.onload = function(e) { tempMediaImage = e.target.result; };
+reader.readAsDataURL(file);
+}
+}
+function saveMedia() {
+const type = document.getElementById('mediaType').value;
+const title = document.getElementById('mediaInputTitle').value.trim();
+const desc = document.getElementById('mediaInputDesc').value.trim();
+const tags = document.getElementById('mediaInputTags').value.split(',').map(t => t.trim()).filter(Boolean);
+if(!title) return alert('Judul harus diisi!');
+const defaultImg = 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=500&q=80';
+const newItem = {
+id: Date.now().toString(),
+title: title,
+desc: desc,
+img: tempMediaImage || defaultImg,
+tags: tags.length ? tags : ['DKV'],
+semester: profile.semester,
+date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })
+};
+  if(type === 'Jurnal') {
+jurnal.unshift(newItem);
+renderJurnalUI();
+} else {
+ide.unshift(newItem);
+renderIdeUI();
+}
+saveData();
+closeMediaModal();
+}
+function deleteJurnal(id) { jurnal = jurnal.filter(j => j.id !== id); saveData(); renderJurnalUI(); }
+function deleteIde(id) { ide = ide.filter(i => i.id !== id); saveData(); renderIdeUI(); }
+// SETTINGS & SCHEDULE EDITOR
+function initSettingsForm() {
+document.getElementById('inputName').value = profile.name;
+document.getElementById('inputStatus').value = profile.status;
+document.getElementById('inputBio').value = profile.bio;
+document.getElementById('inputSemester').value = profile.semester;
+}
+function switchSettingTab(tab, btn) {
+document.querySelectorAll('#page-pengaturan .tab-btn').forEach(b => b.classList.remove('active'));
+btn.classList.add('active');
+document.getElementById('settingTabProfile').style.display = tab === 'profile' ? 'block' : 'none';
+document.getElementById('settingTabSchedule').style.display = tab === 'schedule' ? 'block' : 'none';
+}
+function saveProfileSettings() {
+profile.name = document.getElementById('inputName').value.trim() || profile.name;
+profile.status = document.getElementById('inputStatus').value.trim() || profile.status;
+profile.bio = document.getElementById('inputBio').value.trim() || profile.bio;
+profile.semester = parseInt(document.getElementById('inputSemester').value) || profile.semester;
+saveData();
+renderProfileUI();
+alert('Profil berhasil diperbarui!');
+}
+    function addScheduleItem() {
+const day = document.getElementById('schedDay').value;
+const name = document.getElementById('schedName').value.trim();
+const time = document.getElementById('schedTime').value.trim();
+if(!name || !time) return alert('Nama matkul & jam harus diisi!');
+if(!schedule[day]) schedule[day] = [];
+schedule[day].push({ name, time });
+saveData();
+renderScheduleEditorList();
+renderScheduleUI();
+document.getElementById('schedName').value = '';
+document.getElementById('schedTime').value = '';
+}
+function removeScheduleItem(day, index) {
+schedule[day].splice(index, 1);
+saveData();
+renderScheduleEditorList();
+renderScheduleUI();
+}
+function renderScheduleEditorList() {
+const list = document.getElementById('scheduleEditorList');
+list.innerHTML = Object.keys(schedule).map(day => <div style="margin-bottom:15px;"> <div style="font-weight:700; font-size:0.85rem; color:var(--accent-light);">${day}</div> ${schedule[day].map((item, idx) =>
+<div style="display:flex; justify-content:space-between; align-items:center; background:var(--input-bg); padding:8px 12px; border-radius:8px; margin-top:6px; font-size:0.8rem;">
+<span>{item.name} ({item.time})</span>
+<i data-lucide="trash-2" style="width:14px; color:#ef4444; cursor:pointer;" onclick="removeScheduleItem('${day}',${idx})"></i>
+</div>
+).join('')} </div> ).join('');
+lucide.createIcons();
+}
+// IMAGE CROPPER LOGIC (HTML5 CANVAS)
+let cropTarget = null;
+let cropImageObj = null;
+let cropScale = 1;
+let cropPanX = 0;
+let cropPanY = 0;
+let isDragging = false;
+let dragStartX = 0;
+let dragStartY = 0;
+function initCropper(input, target) {
+const file = input.files[0];
+if (!file) return;
+cropTarget = target;
+const reader = new FileReader();
+reader.onload = function(e) {
+cropImageObj = new Image();
+cropImageObj.onload = function() {
+cropScale = 1;
+cropPanX = 0;
+cropPanY = 0;
+document.getElementById('cropModal').classList.add('active');
+drawCropCanvas();
+};
+cropImageObj.src = e.target.result;
+};
+reader.readAsDataURL(file);
+}
+  function drawCropCanvas() {
+const canvas = document.getElementById('cropCanvas');
+const ctx = canvas.getContext('2d');
+canvas.width = canvas.parentElement.clientWidth;
+canvas.height = canvas.parentElement.clientHeight;
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+if (!cropImageObj) return;
+ctx.save();
+ctx.translate(canvas.width / 2 + cropPanX, canvas.height / 2 + cropPanY);
+ctx.scale(cropScale, cropScale);
+ctx.drawImage(cropImageObj, -cropImageObj.width / 2, -cropImageObj.height / 2);
+ctx.restore();
+ctx.fillStyle = 'rgba(0,0,0,0.5)';
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+ctx.globalCompositeOperation = 'destination-out';
+ctx.beginPath();
+if(cropTarget === 'avatar') {
+ctx.arc(canvas.width/2, canvas.height/2, 70, 0, Math.PI * 2);
+} else {
+ctx.rect(canvas.width/2 - 140, canvas.height/2 - 50, 280, 100);
+}
+ctx.fill();
+ctx.globalCompositeOperation = 'source-over';
+}
+function adjustZoom(factor) {
+cropScale *= factor;
+drawCropCanvas();
+}
+const canvas = document.getElementById('cropCanvas');
+canvas.addEventListener('mousedown', e => {
+isDragging = true;
+dragStartX = e.clientX - cropPanX;
+dragStartY = e.clientY - cropPanY;
 });
-/* Profile crop selections are previewed and retained until Save profile. */
-const originalProfileForm=profileForm;
-profileForm=function(){originalProfileForm();let form=$('#profileForm');if(form){form.dataset.profileDraft='1';}};
-/* Prevent accidental losing of selected profile images before saving. */
-document.addEventListener('change',e=>{if(e.target.id==='avatarPick'||e.target.id==='bannerPick'){if(e.target.files[0])toast('Gambar dipilih. Tekan tombol crop untuk mengatur tampilannya.')}});
-/* Reopen profile form after applying crop, preserving typed fields. */
-const oldApplyCrop=applyCrop;
-applyCrop=function(){let name=$('#profileForm [name="name"]')?.value,bio=$('#profileForm [name="bio"]')?.value;oldApplyCrop();if($('#profileForm')){$('#profileForm [name="name"]').value=name||state.profile.name;$('#profileForm [name="bio"]').value=bio||state.profile.bio;}};
-initPersistence();
-})();
+window.addEventListener('mousemove', e => {
+if(!isDragging) return;
+cropPanX = e.clientX - dragStartX;
+cropPanY = e.clientY - dragStartY;
+drawCropCanvas();
+});
+window.addEventListener('mouseup', () => isDragging = false);
+function closeCropper() {
+document.getElementById('cropModal').classList.remove('active');
+}
+function applyCrop() {
+const canvas = document.getElementById('cropCanvas');
+const croppedDataUrl = canvas.toDataURL('image/png');
+if (cropTarget === 'avatar') {
+profile.avatar = croppedDataUrl;
+} else {
+profile.banner = croppedDataUrl;
+  }
+  saveData();
+renderProfileUI();
+closeCropper();
+}
 </script>
 </body>
 </html>
